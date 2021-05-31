@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-u5^g_-1tgspl0wba$*7_*$&r!kzwuk4au(g@)&grmawf(k_ecb
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.1.9', '127.0.0.1']
 
 
 # Application definition
@@ -76,11 +76,14 @@ WSGI_APPLICATION = 'digitalization.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME':  'digitalization',
+        'USER': 'postgres',
+        'PASSWORD': '',
+        'HOST' : 'localhost',
+        'PORT' : '5432',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
