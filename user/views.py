@@ -32,6 +32,10 @@ def login_user(request):
         return HttpResponseRedirect(reverse('profile'))
     return HttpResponseRedirect(reverse('index'))
 
+def logout_user(request):
+    logout(request)
+    return HttpResponseRedirect(reverse('index'))
 
 def profile(request):
-    return render(request, 'profile.html')
+    user = request.user
+    return render(request, 'profile.html', {'user' : user})
