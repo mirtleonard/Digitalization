@@ -9,9 +9,14 @@
 <body>
 
 <div class="container">
-  <form class="m-5"action="{%url 'addReport'%}" method="get">
-    <button type="submit" class="btn btn-primary"> Adauga Raport Activitate </button>
-  </form>
+  <div class="my-5 d-flex">
+    <form action="{%url 'addReport'%}" method="get">
+      <button type="submit" class="btn btn-primary"> Adauga Raport Activitate </button>
+    </form>
+    <form class="mx-3"action="{%url 'viewReports'%}" method="get">
+      <button type="submit" class="btn btn-primary"> Vezi rapoarte </button>
+    </form>
+  </div>
   <h2>Profil</h2>
   <div class="card">
     <div class="card-header">Lider</div>

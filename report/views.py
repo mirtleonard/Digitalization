@@ -22,7 +22,15 @@ def submitReport(request):
         improvements = request.POST.get('improvements'),
     )
     report.save()
+    user = request.user
+    user.reports += 1
+    user.save()
     return HttpResponseRedirect(reverse('profile'))
 
 def addReport(request):
-    return render(request, 'report.html')
+    return render(request, 'AddReport.html')
+
+def viewReports(request):
+    reports = Report.objects.order_by('date')
+    context = {'reports' : reports}
+    return render(request, 'ViewReports.html', context)
