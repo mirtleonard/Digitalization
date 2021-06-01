@@ -8,7 +8,7 @@ class Report(models.Model):
     areas = models.CharField(max_length=40);
     location = models.CharField(max_length=40);
     title = models.CharField(max_length=40);
-    duration = models.IntegerField();
+    duration = models.CharField(max_length=40);
     date = models.DateField();
     participants = models.CharField(max_length=40);
     description = models.CharField(max_length=40);
