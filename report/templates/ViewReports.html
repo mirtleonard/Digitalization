@@ -6,21 +6,29 @@
   </head>
   <body>
     <h1 class="d-flex justify-content-center m-3">Rapoarte</h1>
-    <div class="d-flex">
-      <div class="container d-flex justify-content-center">
-        <div style=" 50%">
-          <h4 style="text-align: center">Cele mai recenter rapoarte:</h4>
+    <div class = "d-flex flex-column justify-content-center">
+
+      <form class="d-flex justify-content-center" action="{% url 'searchReport' %}" method="get">
+        <div class="form-outline">
+          <input type="text" placeholder="Search.." name="search">
+        </div>
+        <button type="submit" class="mx-2 btn btn-primary">Search</button>
+      </form>
+
+      <div class="container d-flex justify-content-center" id="result">
+        <div style=" width:50%">
+          <h4 style="text-align: center"> Rezultate:</h4>
           <div class="d-flex flex-column" style="overflow-x : auto; max-height : 60vh">
             {% if reports %}
-              {% for report in reports%}
-              <div class="card m-2">
-                <div class="card-header"><a href="{{paste.id}}">{{report.title}}</a></div>
-                <div data-offset="50" class="card-body" style="overflow-x : auto; max-height : 10vh ">{{report.branch}}</div>
-                <div class="card-footer">{{report.date}}</div>
-              </div>
-              {%endfor%}
+            {% for report in reports%}
+            <div class="card m-2">
+              <div class="card-header">{{report.title}}</div>
+              <div data-offset="50" class="card-body" style="overflow-x : auto; max-height : 10vh ">{{report.branch}}</div>
+              <div class="card-footer">{{report.date}}</div>
+            </div>
+            {%endfor%}
             {% else %}
-              <h3 class="d-flex justify-content-center">Nu exista nici un raport </h3>
+            <h3 class="d-flex justify-content-center">Nu exista nici un raport </h3>
             {% endif %}
           </div>
         </div>
@@ -28,5 +36,5 @@
 
     </div>
   </div>
-  </body>
+</body>
 </html>

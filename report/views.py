@@ -2,6 +2,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from report.models import Report
 from django.urls import reverse
+from django.db.models import Q
 
 # Create your views here.
 
@@ -32,5 +33,25 @@ def addReport(request):
 
 def viewReports(request):
     reports = Report.objects.order_by('date')
+    context = {'reports' : reports}
+    return render(request, 'ViewReports.html', context)
+
+def searchReport(request):
+    search = request.GET.get('search')
+    print(search)
+    reports = Report.objects.filter(Q(title__icontains = search) |
+                                    Q(username__icontains = search) |
+                                    Q(branch__icontains = search) |
+                                    Q(date__icontains = search) |
+                                    Q(description__icontains = search) |
+                                    Q(goals__icontains = search) |
+                                    Q(strengths__icontains = search) |
+                                    Q(weaknesses__icontains = search) |
+                                    Q(goals__icontains = search) |
+                                    Q(duration__icontains = search) |
+                                    Q(areas__icontains = search) |
+                                    Q(improvements__icontains = search))
+    if (not reports):
+        reports = ""
     context = {'reports' : reports}
     return render(request, 'ViewReports.html', context)

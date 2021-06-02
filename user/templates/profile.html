@@ -16,6 +16,10 @@
     <form class="mx-3"action="{%url 'viewReports'%}" method="get">
       <button type="submit" class="btn btn-primary"> Vezi rapoarte </button>
     </form>
+  <form action="{%url 'logout_user'%}" method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-primary">Logout</button>
+  </form>
   </div>
   <h2>Profil</h2>
   <div class="card">
@@ -23,10 +27,6 @@
     <div class="card-body">{{user.username}}</div>
     <div class="card-footer">{{user.email}}</div>
   </div>
-  <form action="{%url 'logout_user'%}" method="post">
-    {% csrf_token %}
-    <button class="btn btn-primary my-2">Logout</button>
-  </form>
 </div>
 
 </body>

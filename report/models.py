@@ -4,18 +4,18 @@ from django.db import models
 
 
 class Report(models.Model):
-    username = models.CharField(max_length=40);
-    areas = models.CharField(max_length=40);
-    location = models.CharField(max_length=40);
-    title = models.CharField(max_length=40);
-    duration = models.CharField(max_length=40);
-    date = models.DateField();
-    participants = models.CharField(max_length=40);
-    description = models.CharField(max_length=40);
-    goals = models.CharField(max_length=40);
-    strengths = models.CharField(max_length=40);
-    weaknesses = models.CharField(max_length=40);
-    improvements = models.CharField(max_length=40);
-    branch = models.CharField(max_length=40)
+    username = models.CharField(max_length=40, default=" ");
+    areas = models.CharField(max_length=40, default=" ");
+    location = models.CharField(max_length=40, default=" ");
+    title = models.CharField(max_length=40, default=" ");
+    duration = models.CharField(max_length=40, default=" ");
+    date = models.DateField(auto_now = True);
+    participants = models.CharField(max_length=40, default=" ");
+    description = models.CharField(max_length=40, default=" ");
+    goals = models.CharField(max_length=40, default=" ");
+    strengths = models.CharField(max_length=40, default=" ");
+    weaknesses = models.CharField(max_length=40, default=" ");
+    improvements = models.CharField(max_length=40, default=" ");
+    branch = models.CharField(max_length=40, default=" ")
     def __str__(self):
         return self.title
