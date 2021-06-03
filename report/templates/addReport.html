@@ -18,17 +18,17 @@
 
       <div class = "form-group">
         <p> Arii de dezvoltare: </p>
-        <input type="checkbox" id="spiritual" name="areas" value="spiritual">
+        <input type="checkbox" id="spiritual" name="areas" value="Spirituala">
         <label for="spiritual"> Spirituala </label><br>
-        <input type="checkbox" id="physical" name="areas" value="physical">
+        <input type="checkbox" id="physical" name="areas" value="Fizica">
         <label for="physical">Fizica</label><br>
-        <input type="checkbox" id="social" name="areas" value="social">
+        <input type="checkbox" id="social" name="areas" value="Sociala">
         <label for="social"> Sociala </label><br>
-        <input type="checkbox" id="intellectual" name="areas" value="intellectual">
+        <input type="checkbox" id="intellectual" name="areas" value="Intelectuala">
         <label for="intellectual"> Intelectuala </label><br>
-        <input type="checkbox" id="affective" name="areas" value="affective">
+        <input type="checkbox" id="affective" name="areas" value="Afectiva">
         <label for="affective"> Afectiva </label><br>
-        <input type="checkbox" id="character" name="areas" value="character">
+        <input type="checkbox" id="character" name="areas" value="Caracter">
         <label for="character"> Caracter </label><br>
       </div>
 
@@ -43,7 +43,7 @@
 
       <div class="form-group">
         <label>Data</label>
-        <input class="form-control" required="required" type="date" value="2003-08-19" name ='date'>
+        <input class="form-control" required="required" type="date"  id="date" name='date'>
       </div>
 
       <div class="form-group">
@@ -101,4 +101,9 @@
     </form>
   </div>
 </body>
+<script>
+  var date = new Date();
+  var now = date.getFullYear() + '-' + ("0" + (date.getMonth() + 1)).slice(-2) + '-' + ("0" + date.getDate()).slice(-2);
+  $("#date").val(now);
+</script>
 </html>

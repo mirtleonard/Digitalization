@@ -1,6 +1,7 @@
 from django.contrib.auth import login, logout, authenticate
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
+from report.models import Report
 from django.urls import reverse
 from user.models import User
 
@@ -8,6 +9,8 @@ from user.models import User
 # Create your views here.
 
 def index(request):
+    if (request.user.username != ""):
+        return HttpResponseRedirect('profile')
     return render(request, 'login.html')
 
 def register(request):
@@ -19,7 +22,7 @@ def register(request):
     branch = request.POST.get('branch'),
     birth = request.POST.get('birth'),
     )
-    user.set_password(request.POST.get('password1')),
+    user.set_password(request.POST.get('password1'))
     user.save()
     return HttpResponseRedirect(reverse('index'))
 
@@ -38,4 +41,7 @@ def logout_user(request):
 
 def profile(request):
     user = request.user
-    return render(request, 'profile.html', {'user' : user})
+    if (user.username != ""):
+        return render(request, 'profile.html', {'user' : user})
+    else:
+        return HttpResponseRedirect('login_user')
