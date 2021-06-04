@@ -7,27 +7,30 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
+  {%include 'messages.html' %}
+  <div class="container">
+    <div class="my-5 d-flex">
+      <form action="{%url 'addReport'%}" method="get">
+        <button type="submit" class="btn btn-primary"> Adauga Raport Activitate </button>
+      </form>
+      <form class="mx-3"action="{%url 'searchReport'%}" method="get">
+        <button type="submit" class="btn btn-primary"> Vezi rapoarte </button>
+      </form>
+      <form action="{%url 'logout_user'%}" method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary">Logout</button>
+      </form>
+    </div>
 
-<div class="container">
-  <div class="my-5 d-flex">
-    <form action="{%url 'addReport'%}" method="get">
-      <button type="submit" class="btn btn-primary"> Adauga Raport Activitate </button>
-    </form>
-    <form class="mx-3"action="{%url 'searchReport'%}" method="get">
-      <button type="submit" class="btn btn-primary"> Vezi rapoarte </button>
-    </form>
-  <form action="{%url 'logout_user'%}" method="post">
-    {% csrf_token %}
-    <button type="submit" class="btn btn-primary">Logout</button>
-  </form>
+    <h2>Profil</h2>
+    <div class="card">
+      <div class="card-header">Lider</div>
+      <div class="card-body">{{user.username}}</div>
+      <div class="card-footer">{{user.email}}</div>
+    </div>
   </div>
-  <h2>Profil</h2>
-  <div class="card">
-    <div class="card-header">Lider</div>
-    <div class="card-body">{{user.username}}</div>
-    <div class="card-footer">{{user.email}}</div>
-  </div>
-</div>
-
 </body>
+<script>
+
+</script>
 </html>

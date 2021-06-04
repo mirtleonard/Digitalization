@@ -1,5 +1,6 @@
 from django.contrib.auth import login, logout, authenticate
 from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib import messages
 from django.shortcuts import render
 from report.models import Report
 from django.urls import reverse
@@ -41,6 +42,7 @@ def logout_user(request):
 
 def profile(request):
     user = request.user
+    messages.success(request, 'Login')
     if (user.username != ""):
         return render(request, 'profile.html', {'user' : user})
     else:

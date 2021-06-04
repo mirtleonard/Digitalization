@@ -26,8 +26,9 @@ class reportForm(style):
                 ('exterior', 'exterior'),
                 ('interior', 'interior'))),
             'branch' : Select(choices = (
-                ('Exploratori', 'Exploratori'),
-                ('Temerari', 'Temerari'))),
+                ('Lupisori', 'Lupisori'),
+                ('Temerari', 'Temerari'),
+                ('Exploratori', 'Exploratori'))),
             'date' : SelectDateWidget()
             }
         labels = {
