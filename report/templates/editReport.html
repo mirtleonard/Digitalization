@@ -1,0 +1,107 @@
+<html>
+<head>
+  <title>Raport</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+  <div class="container">
+
+    <form action="{% url 'submitReport' %}" method="post">
+      {% csrf_token %}
+      <div class="form-group">
+        <label">Titlu:</label>
+        <input  required="required" class="form-control" name="title">
+      </div>
+
+      <div class = "form-group">
+        <p> Arii de dezvoltare: </p>
+        <input type="checkbox" id="spiritual" name="areas" value="Spirituala"
+        {% if "Spirituala" in report.areas %}{{checked}}{%endif%}>
+
+
+        <label for="spiritual"> Spirituala </label><br>
+        <input type="checkbox" id="physical" name="areas" value="Fizica">
+        <label for="physical">Fizica</label><br>
+        <input type="checkbox" id="social" name="areas" value="Sociala">
+        <label for="social"> Sociala </label><br>
+        <input type="checkbox" id="intellectual" name="areas" value="Intelectuala">
+        <label for="intellectual"> Intelectuala </label><br>
+        <input type="checkbox" id="affective" name="areas" value="Afectiva">
+        <label for="affective"> Afectiva </label><br>
+        <input type="checkbox" id="character" name="areas" value="Caracter">
+        <label for="character"> Caracter </label><br>
+      </div>
+
+      <div class="form-group">
+        <label>Ramura:</label>
+        <select class="form-control" name="branch">
+          <option value="Exploratori">Lupisori</option>
+          <option value="Temerari">Temerari</option>
+          <option value="Lupisori">Exploratori</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Data</label>
+        <input class="form-control" required="required" type="date"  id="date" name='date'>
+      </div>
+
+      <div class="form-group">
+        <label>Locatia:</label>
+        <select class="form-control" name="location">
+          <option value="indoor">Interior</option>
+          <option value="outdoor">Exterior</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Numar de participanti:</label>
+        <select class="form-control" name="participants">
+          <option value="1-5">1-5</option>
+          <option value="5-15">5-15</option>
+          <option value="15-30">15-30</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Durata:</label>
+        <select class="form-control" name="duration">
+          <option value="0-1h">0-1h</option>
+          <option value="2-3h">2-3h</option>
+          <option value="3h+">3h+</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Descrierea activitatii:</label><br>
+        <textarea rows="4" cols="70" id="description" name = "description"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Obiective:</label><br>
+        <textarea rows="4" cols="70" id="goals" name = "goals"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Puncte tari:</label><br>
+        <textarea rows="4" cols="70" id="strengths" name = "strengths"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Puncte slabe:</label><br>
+        <textarea rows="4" cols="70" id="weaknesses" name = "weaknesses"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Imbunatatiri:</label><br>
+        <textarea rows="4" cols="70" id="improvements" name = "improvements"></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Adauga raport</button>
+    </form>
+  </div>
+</body>
+</html>

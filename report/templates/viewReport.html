@@ -7,13 +7,24 @@
   </head>
   <body>
     <div class="containter d-flex justify-content-center">
-      <div class="">
-        <h1>{{report.title}}</h1>
-        <p>{{report.despcription}}</p>
-        <p>{{report.strengths}}</p>
-        <p>{{report.weaknesses}}</p>
-        <p>{{report.improvements}}</p>
-        <p>{{report.username}}</p>
+      <div class="card my-5">
+        <div class="card-header">
+          <h1>{{report.title}}</h1>
+        </div>
+        <div class="card-body">
+          <h4>{{report.username}}</h4>
+          <p>{{report.despcription}}</p>
+          <p>{{report.strengths}}</p>
+          <p>{{report.weaknesses}}</p>
+          <p>{{report.improvements}}</p>
+          <p>{{report.username}}</p>
+          <p>{{report.branch}}</p>
+        </div>
+        <div class="card-footer d-flex justify-content-end">
+        <form action="{% url 'editReport' report.id %}" method="get">
+          <button class="btn btn-primary" type="submit" name="button">Edit</button>
+        </form>
+        </div>
       </div>
     </div>
   </body>
