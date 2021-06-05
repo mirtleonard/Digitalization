@@ -21,7 +21,7 @@
           <p>{{report.branch}}</p>
         </div>
         <div class="card-footer d-flex justify-content-end">
-        <form action="{% url 'editReport' report.id %}" method="get">
+        <form action="{% url 'updateReport' report.id %}" method="get">
           <button class="btn btn-primary" type="submit" name="button">Edit</button>
         </form>
         </div>

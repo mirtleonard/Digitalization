@@ -8,10 +8,11 @@ class style(ModelForm):
             field.widget.attrs.update({'class':'form-control'})
 
 class reportForm(style):
+    username = CharField(widget=HiddenInput())
     class Meta:
         model = Report
         filed = '__all__'
-        exclude = ['username']
+        exclude = ()
         widgets = {
             'description' : Textarea(
                 attrs = {'class':'form-control'}),
