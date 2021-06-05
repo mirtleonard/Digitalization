@@ -42,7 +42,7 @@ def logout_user(request):
 
 def profile(request):
     user = request.user
-    messages.success(request, 'Login')
+    messages.success(request, request.user.get_username())
     if (user.username != ""):
         return render(request, 'profile.html', {'user' : user})
     else:

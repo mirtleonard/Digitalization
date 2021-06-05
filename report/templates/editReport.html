@@ -8,7 +8,7 @@
 </head>
 <body>
   <div class="container">
-    <form action="{%url 'submitReport' %}" method="post">
+    <form action="{{path}}" method="post">
       {% csrf_token %}
       {{report.as_p}}
       <button class="btn btn-primary" type="submit"> Adauga raport </button>
