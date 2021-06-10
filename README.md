@@ -1,2 +1,0 @@
-# Digitalization
-Reports digitalization
