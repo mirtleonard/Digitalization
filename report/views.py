@@ -1,4 +1,5 @@
 from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404
 from django.contrib import messages
 from report.forms import reportForm
@@ -7,10 +8,12 @@ from django.urls import reverse
 from django.db.models import Q
 
 # Create your views here.
+@login_required
 def viewReport(request, report_id):
     report = get_object_or_404(Report, pk=report_id)
     return render(request, 'viewReport.html', {'report': report})
 
+@login_required
 def createReport(request):
     if request.method == 'POST':
         form = reportForm(request.POST)
@@ -32,7 +35,7 @@ def createReport(request):
     }
     return render(request, 'editReport.html', context)
 
-
+@login_required
 def updateReport(request, report_id):
     if request.method == 'POST':
         form = reportForm(request.POST)
@@ -57,7 +60,7 @@ def updateReport(request, report_id):
     return render(request, 'editReport.html', context)
 
 
-
+@login_required
 def searchReport(request):
     search = request.GET.get('search')
     if (not search):

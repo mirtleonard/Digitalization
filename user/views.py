@@ -1,5 +1,6 @@
 from django.contrib.auth import login, logout, authenticate
 from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.shortcuts import render
 from user.forms import registerForm
@@ -46,11 +47,8 @@ def logout_user(request):
     logout(request)
     return HttpResponseRedirect(reverse('index'))
 
+@login_required
 def profile(request):
     user = request.user
-    messages.success(request, request.user.get_username())
     reports = Report.objects.filter(username = request.user.get_username()).order_by('-date')
-    if (user.username != ""):
-        return render(request, 'profile.html', {'user' : user, 'reports' : reports})
-    else:
-        return HttpResponseRedirect('login_user')
+    return render(request, 'profile.html', {'user' : user, 'reports' : reports})
