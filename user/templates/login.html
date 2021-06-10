@@ -6,7 +6,7 @@
     <div class="card" style="margin-top:20VH; width:70%">
       <h5 class="card-header bg">Autentificare</h5>
       <div class="card-body">
-        <form action="{% url 'login_user' %}" method="POST">
+        <form action="{% url 'login_user' %}" id="login" method="POST">
           {% csrf_token %}
           <div class="form-group">
             <label>Nume:</label>
@@ -16,13 +16,11 @@
             <label>Parola:</label>
             <input type="password" class="form-control" name="password">
           </div>
-          <div class="d-flex justify-content-center">
-            <button type="submit" class="btn btn-info">Login</button>
-          </div>
         </form>
-        <form class="d-flex justify-content-center" action="{% url 'register' %}" method="GET">
-          <button type="submit" class="btn btn-info">Register</button>
+        <form id="register" action="{% url 'register' %}" method="GET">
         </form>
+          <button type="submit" form="login" class="btn btn-info d-inline">Login</button>
+          <button type="submit" form="register" class="btn btn-info d-inline float-right">Register</button>
       </div>
     </div>
 {%endblock%}

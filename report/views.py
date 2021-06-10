@@ -55,10 +55,22 @@ def updateReport(request, report_id):
             return viewReport(request, report_id)
     context = {
         'report' : form,
-        'path' : "updateReport" ,
     }
     return render(request, 'editReport.html', context)
 
+@login_required
+def deleteReport(request, report_id):
+    report = get_object_or_404(Report, pk = report_id)
+    if report.username != request.user.get_username():
+        messages.error(request, "Doar creatorul poate șterge formularul")
+        return viewReport(request, report_id)
+    else:
+        user = request.user
+        user.reports -= 1
+        user.save()
+        Report.objects.filter(id = report_id).delete()
+        messages.success(request, "Raportul a fost șters!")
+        return HttpResponseRedirect(reverse('profile'))
 
 @login_required
 def searchReport(request):

@@ -1,6 +1,9 @@
 from django.forms import *
 from report.models import Report
 
+class DateInput(DateInput):
+    input_type = 'date'
+
 class Style(ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -27,7 +30,7 @@ class reportForm(Style):
                 ('Lupisori', 'Lupisori'),
                 ('Temerari', 'Temerari'),
                 ('Exploratori', 'Exploratori'))),
-            'date' : SelectDateWidget()
+            'date' : DateInput()
             }
         labels = {
             'materials' : 'Materiale necesare',

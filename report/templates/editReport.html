@@ -5,7 +5,7 @@
     <div class="card my-5 bg-white" style="width:600px">
       <h5 class="card-header">Raport de activitate</h5>
 
-      <form class="card-body" action="{{path}}" method="post">
+      <form class="card-body" action="updateReport" method="post">
         {% csrf_token %}
         {{report.as_p}}
         <div class="d-flex justify-content-center">
