@@ -1,122 +1,114 @@
-<html>
-<head>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</head>
-<body>
-  <h1 class="d-flex justify-content-center m-3">Rapoarte</h1>
-  <div class = "d-flex flex-column justify-content-center">
+{%extends "base.html" %}
+{%load static%}
+{%block content%}
+<div class = "d-flex flex-column justify-content-center my-3">
 
-    <form class="d-flex justify-content-center" action="{% url 'searchReport' %}" method="get">
-      <div class="form-outline">
-        <input type="text" placeholder="" name="search">
-      </div>
-      <button type="submit" class="mx-2 btn btn-primary">Search</button>
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#filter">Filtre</button>
+  <form class="d-flex justify-content-center" action="{% url 'searchReport' %}" method="get">
+    <div class="form-outline">
+      <input class="form-control" type="text" placeholder="" name="search">
+    </div>
+    <button type="submit" class="mx-2 btn btn-info">Search</button>
+    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#filter">Filtre</button>
 
 
-      <div class="modal fade" id="filter" role="dialog">
-        <div class="modal-dialog">
+    <div class="modal fade" id="filter" role="dialog">
+      <div class="modal-dialog">
 
-          <!-- Modal content-->
-          <div class="modal-content">
-            <div class="modal-header">
-              <h4 class="modal-title">Filtre</h4>
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Filtre</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
 
-            <div class="modal-body">
-              <div class="container">
+          <div class="modal-body">
+            <div class="container">
 
-                <div class = "form-group">
-                  <label> Arie de dezvoltare: </label>
-                  <select class="form-control" name="aries">
-                    <option value=""> </option>
-                    <option value="Spirituala">Spirituala</option>
-                    <option value="Fizica">Fizica</option>
-                    <option value="Sociala">Sociala</option>
-                    <option value="Intelectuala">Intelectuala</option>
-                    <option value="Afectiva">Afectiva</option>
-                    <option value="Caracter">Caracter</option>
-                  </select>
-                </div>
-
-                <div class="form-group">
-                  <label>Ramura:</label>
-                  <select class="form-control" name="branch">
-                    <option value=""></option>
-                    <option value="Exploratori">Lupisori</option>
-                    <option value="Temerari">Temerari</option>
-                    <option value="Lupisori">Exploratori</option>
-                  </select>
-                </div>
-
-                <div class="form-group">
-                  <label>Data</label>
-                  <input class="form-control" type="date"  id="date" name='date'>
-                </div>
-
-                <div class="form-group">
-                  <label>Locatia:</label>
-                  <select class="form-control" name="location">
-                    <option value=""></option>
-                    <option value="indoor">Interior</option>
-                    <option value="outdoor">Exterior</option>
-                  </select>
-                </div>
-
-                <div class="form-group">
-                  <label>Numar de participanti:</label>
-                  <select class="form-control" name="participants">
-                    <option value=""> </option>
-                    <option value="1-5">1-5</option>
-                    <option value="5-15">5-15</option>
-                    <option value="15-30">15-30</option>
-                  </select>
-                </div>
-
-                <div class="form-group">
-                  <label>Durata:</label>
-                  <select class="form-control" name="duration">
-                    <option value=""> </option>
-                    <option value="0-1h">0-1h</option>
-                    <option value="2-3h">2-3h</option>
-                    <option value="3h+">3h+</option>
-                  </select>
-                </div>
+              <div class = "form-group">
+                <label> Arie de dezvoltare: </label>
+                <select class="form-control" name="aries">
+                  <option value=""> </option>
+                  <option value="Spirituala">Spirituala</option>
+                  <option value="Fizica">Fizica</option>
+                  <option value="Sociala">Sociala</option>
+                  <option value="Intelectuala">Intelectuala</option>
+                  <option value="Afectiva">Afectiva</option>
+                  <option value="Caracter">Caracter</option>
+                </select>
               </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Aplica</button>
+
+              <div class="form-group">
+                <label>Ramura:</label>
+                <select class="form-control" name="branch">
+                  <option value=""></option>
+                  <option value="Exploratori">Lupisori</option>
+                  <option value="Temerari">Temerari</option>
+                  <option value="Lupisori">Exploratori</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label>Data</label>
+                <input class="form-control" type="date"  id="date" name='date'>
+              </div>
+
+              <div class="form-group">
+                <label>Locatia:</label>
+                <select class="form-control" name="location">
+                  <option value=""></option>
+                  <option value="indoor">Interior</option>
+                  <option value="outdoor">Exterior</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label>Numar de participanti:</label>
+                <select class="form-control" name="participants">
+                  <option value=""> </option>
+                  <option value="1-5">1-5</option>
+                  <option value="5-15">5-15</option>
+                  <option value="15-30">15-30</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label>Durata:</label>
+                <select class="form-control" name="duration">
+                  <option value=""> </option>
+                  <option value="0-1h">0-1h</option>
+                  <option value="2-3h">2-3h</option>
+                  <option value="3h+">3h+</option>
+                </select>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </form>
-
-    <div class="container d-flex justify-content-center" id="result">
-      <div style=" width:50%">
-        <h4 style="text-align: center"> Rezultate:</h4>
-        <div class="d-flex flex-column" style="overflow-x : auto; max-height : 60vh">
-          {% if reports %}
-          {% for report in reports%}
-          <div class="card m-2">
-            <div class="card-header"><a href= "reports/{{report.id}}">{{report.title}}</a></div>
-            <div data-offset="50" class="card-body" style="overflow-x : auto; max-height : 10vh ">{{report.branch}}</div>
-            <div class="card-footer">
-              {{report.date}}
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary">Aplica</button>
             </div>
           </div>
-          {%endfor%}
-          {% else %}
-          <h3 class="d-flex justify-content-center">Nu exista nici un raport </h3>
-          {% endif %}
         </div>
       </div>
     </div>
-
+  </form>
+</div>
+<div class="container d-flex justify-content-center" style="min-height: 30VH;" id="result">
+  <div style=" width:500PX">
+    <h4 style="text-align: center"> Rezultate:</h4>
+    <div class="d-flex flex-column" style="overflow-x : auto; max-height: 60VH; margin-top:10VH; margin-bottom:10VH">
+      {% if reports %}
+      {% for report in reports%}
+      <div class="card m-2">
+        <div class="card-header"><a href= "reports/{{report.id}}">{{report.title}}</a></div>
+        <div data-offset="50" class="card-body" style="overflow-x : auto; max-height : 10vh ">{{report.branch}}</div>
+        <div class="card-footer">
+          {{report.date}}
+        </div>
+      </div>
+      {%endfor%}
+      {% else %}
+      <h3 class="d-flex justify-content-center" style="margin-top: 20VH; margin-bottom: 20VH">Nu exista nici un raport </h3>
+      {% endif %}
+    </div>
   </div>
+</div>
 
-</body>
-</html>
+</div>
+{%endblock%}

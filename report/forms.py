@@ -1,17 +1,17 @@
 from django.forms import *
 from report.models import Report
 
-class style(ModelForm):
+class Style(ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.fields.values():
             field.widget.attrs.update({'class':'form-control'})
 
-class reportForm(style):
+class reportForm(Style):
     username = CharField(widget=HiddenInput())
     class Meta:
         model = Report
-        filed = '__all__'
+        fileds = '__all__'
         exclude = ()
         widgets = {
             'description' : Textarea(
@@ -23,9 +23,6 @@ class reportForm(style):
                 ('afectiva', 'afectiva'),
                 ('sociala', 'sociala'),
                 ('fizica', 'fizica'))),
-            'location' : Select(choices = (
-                ('exterior', 'exterior'),
-                ('interior', 'interior'))),
             'branch' : Select(choices = (
                 ('Lupisori', 'Lupisori'),
                 ('Temerari', 'Temerari'),
@@ -33,6 +30,7 @@ class reportForm(style):
             'date' : SelectDateWidget()
             }
         labels = {
+            'materials' : 'Materiale necesare',
             'title' : 'Titlu',
             'description' : 'Descriere',
             'areas' : 'Arie de dezvoltare',

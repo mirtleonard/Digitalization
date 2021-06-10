@@ -1,31 +1,31 @@
-<html>
-  <head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <title>{{report.title}}</title>
-  </head>
-  <body>
-    <div class="containter d-flex justify-content-center">
-      <div class="card my-5">
-        <div class="card-header">
-          <h1>{{report.title}}</h1>
-        </div>
-        <div class="card-body">
-          <h4>{{report.username}}</h4>
-          <p>{{report.despcription}}</p>
-          <p>{{report.strengths}}</p>
-          <p>{{report.weaknesses}}</p>
-          <p>{{report.improvements}}</p>
-          <p>{{report.username}}</p>
-          <p>{{report.branch}}</p>
-        </div>
-        <div class="card-footer d-flex justify-content-end">
-        <form action="{% url 'updateReport' report.id %}" method="get">
-          <button class="btn btn-primary" type="submit" name="button">Edit</button>
-        </form>
-        </div>
-      </div>
+{%extends "base.html" %}
+{%load static%}
+{%block content%}
+<div class="containter d-flex justify-content-center">
+  <div class="card my-5" style="width:600px">
+    <div class="card-header">
+      <h1>{{report.title}}</h1>
     </div>
-  </body>
-  </html>
+    <div class="card-body">
+      <p> <b>Ramura de vârstă:</b> {{report.branch}}</p><br>
+      <p> <b>Aria de dezvoltare:</b> {{report.areas}}</p><br>
+      <p> <b>Loc de desfășurare:  </b>  {{report.location}}</p><br>
+      <p> <b>Data:  </b>  {{report.date}}</p><br>
+      <p> <b>Durata:</b>  {{report.duration}}</p><br>
+      <p> <b>Număr de participanți: </b> {{report.participants}} </p> <br>
+      <p> <b>Materiale necesare: </b> {{report.materials|linebreaks}} </p> <br>
+      <p> <b>Obiectivele activității: </b> {{report.goals|linebreaks}} </p> <br>
+      <p> <b> Descrierea activității:</b> <br> {{report.description|linebreaks}}</p><br>
+      <p> <b> Puncte tari:</b> <br> {{report.strengths|linebreaks}}</p>
+      <p> <b> Puncte slabe:</b> <br> {{report.weaknesses|linebreaks}}</p>
+      <p> <b> Îmbunătățiri:</b> <br> {{report.improvements|linebreaks}}</p>
+      <p> <b> Raport realizat de:</b> {{report.username|linebreaks}}</p>
+    </div>
+    <div class="card-footer d-flex justify-content-center">
+      <form action="{% url 'updateReport' report.id %}" method="get">
+        <button class="btn btn-info" type="submit" name="button">Edit</button>
+      </form>
+    </div>
+  </div>
+</div>
+{%endblock%}

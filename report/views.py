@@ -16,7 +16,6 @@ def createReport(request):
         form = reportForm(request.POST)
         if (form.is_valid()):
             report = form.save(commit=False)
-            report.username = request.user.get_username()
             messages.success(request, "Raportul a fost creat!")
             user = request.user
             user.reports += 1
@@ -26,7 +25,7 @@ def createReport(request):
         else:
             messages.error(request, "Raportul nu a fost creat!")
     else:
-        form = reportForm()
+        form = reportForm(initial = {'username' : request.user.get_username()})
     context = {
         'report' : form,
         'path' : 'createReport',
@@ -37,7 +36,6 @@ def createReport(request):
 def updateReport(request, report_id):
     if request.method == 'POST':
         form = reportForm(request.POST)
-        form.instance.username = request.user.get_username()
         if form.is_valid():
             messages.success(request, "Raportul a fost editat!")
             report = form.save(commit=False)
@@ -62,20 +60,19 @@ def updateReport(request, report_id):
 
 def searchReport(request):
     search = request.GET.get('search')
-    filter
     if (not search):
         search = ""
-    reports = Report.objects.filter(Q(title__icontains = search) |
-                                    Q(username__icontains = search) |
-                                    Q(branch__icontains = search) |
+    reports = Report.objects.filter(Q(title__unaccent__icontains = search) |
+                                    Q(username__unaccent__icontains = search) |
+                                    Q(branch__unaccent__icontains = search) |
                                     Q(date__icontains = search) |
-                                    Q(description__icontains = search) |
-                                    Q(goals__icontains = search) |
-                                    Q(strengths__icontains = search) |
-                                    Q(weaknesses__icontains = search) |
-                                    Q(duration__icontains = search) |
-                                    Q(areas__icontains = search) |
-                                    Q(improvements__icontains = search))
+                                    Q(description__unaccent__icontains = search) |
+                                    Q(goals__unaccent__icontains = search) |
+                                    Q(strengths__unaccent__icontains = search) |
+                                    Q(weaknesses__unaccent__icontains = search) |
+                                    Q(duration__unaccent__icontains = search) |
+                                    Q(areas__unaccent__icontains = search) |
+                                    Q(improvements__unaccent__icontains = search))
     if (not reports):
         reports = ""
     return render(request, 'searchReport.html', {'reports':reports})

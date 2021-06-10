@@ -2,8 +2,9 @@ from django.contrib.auth import login, logout, authenticate
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib import messages
 from django.shortcuts import render
-from report.models import Report
+from user.forms import registerForm
 from django.urls import reverse
+from report.models import Report
 from user.models import User
 
 
@@ -14,18 +15,23 @@ def index(request):
         return HttpResponseRedirect('profile')
     return render(request, 'login.html')
 
+
 def register(request):
-    if (request.POST.get('password1') and request.POST.get('password1') != request.POST.get('password2')):
-        raise ValueError("password don't match")
-    user = User(
-    username = request.POST.get('username'),
-    email = request.POST.get('email'),
-    branch = request.POST.get('branch'),
-    birth = request.POST.get('birth'),
-    )
-    user.set_password(request.POST.get('password1'))
-    user.save()
-    return HttpResponseRedirect(reverse('index'))
+    if request.method == 'POST':
+        form = registerForm(request.POST)
+        if (form.is_valid()):
+            user = User(
+                username = form.cleaned_data.get('username'),
+                email = form.cleaned_data.get('email'),
+                password = form.cleaned_data.get('password'),
+                branch = form.cleaned_data.get('branch'),
+                birth = form.cleaned_data.get('birth'),
+            )
+            user.save()
+            return HttpResponseRedirect('profile')
+    else:
+        form = registerForm()
+    return render (request, 'register.html', {'form' : form})
 
 def login_user(request):
     username = request.POST.get('username')
@@ -43,7 +49,8 @@ def logout_user(request):
 def profile(request):
     user = request.user
     messages.success(request, request.user.get_username())
+    reports = Report.objects.filter(username = request.user.get_username()).order_by('-date')
     if (user.username != ""):
-        return render(request, 'profile.html', {'user' : user})
+        return render(request, 'profile.html', {'user' : user, 'reports' : reports})
     else:
         return HttpResponseRedirect('login_user')

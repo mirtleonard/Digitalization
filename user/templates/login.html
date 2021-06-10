@@ -1,87 +1,29 @@
-<html>
-<head>
-  <title>Login</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</head>
-<body>
-
-  <div class="d-flex justify-content-center" style="margin-top: 20vh">
-    <div class="container">
-      <h2 class="my-5"> Autentificare: </h2>
-      <form action="{% url 'login_user' %}" method="POST">
-        {% csrf_token %}
-        <div class="form-group">
-          <label>Nume:</label>
-          <input class="form-control" placeholder="" name="username">
-        </div>
-        <div class="form-group">
-          <label>Parola:</label>
-          <input type="password" class="form-control" name="password">
-        </div>
-        <button type="submit" class="btn btn-primary">Login</button>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#register">Register</button>
-      </form>
-    </div>
-  </div>
-
-  <div class="modal fade" id="register" role="dialog">
-    <div class="modal-dialog">
-
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">Lider</h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        <form action="{% url 'register' %}" method="post">
+{%extends "base.html" %}
+{%load static%}
+{%block title%} Login {%endblock%}
+{%block navbar%}{%endblock%}
+{%block content%}
+  <div class="container d-flex justify-content-center">
+    <div class="card" style="margin-top:20VH; width:70%">
+      <h5 class="card-header bg">Autentificare</h5>
+      <div class="card-body">
+        <form action="{% url 'login_user' %}" method="POST">
           {% csrf_token %}
-
-          <div class="modal-body">
-
-            <div class="form-group">
-              <label for="pwd">Nume:</label>
-              <input  required="required" type="name" class="form-control"  name="username">
-            </div>
-            <div class="form-group">
-              <label for="email">Email:</label>
-              <input required="required" type="email" class="form-control" name="email">
-            </div>
-            <div class="form-group">
-              <label for="pwd">Parola:</label>
-              <input required="required" type="password" class="form-control" name="password1">
-            </div>
-            <div class="form-group">
-              <label for="pwd">Repeta parola:</label>
-              <input type="password" class="form-control" name="password2">
-            </div>
-            <div class="form-group">
-              <label for="pwd">Ramura:</label>
-              <select class="form-control" name="branch">
-                <option value="Exploratori">Exploratori</option>
-                <option value="Temerari">Temerari</option>
-                <option value="Lupisori">Lupisori</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="example-date-input">Data de nastere:</label>
-              <input class="form-control" required="required" type="date" value="2003-08-19" name = 'birth'>
-            </div>
-
+          <div class="form-group">
+            <label>Nume:</label>
+            <input class="form-control" placeholder="" name="username">
           </div>
-          <div class="modal-footer">
-            <button type="submit" class="btn btn-primary">Inregistreaza-te</button>
+          <div class="form-group">
+            <label>Parola:</label>
+            <input type="password" class="form-control" name="password">
           </div>
-        </div>
-      </form>
-
+          <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-info">Login</button>
+          </div>
+        </form>
+        <form class="d-flex justify-content-center" action="{% url 'register' %}" method="GET">
+          <button type="submit" class="btn btn-info">Register</button>
+        </form>
+      </div>
     </div>
-  </div>
-
-
-</body>
-</html>
+{%endblock%}
