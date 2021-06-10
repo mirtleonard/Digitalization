@@ -24,12 +24,12 @@ def register(request):
             user = User(
                 username = form.cleaned_data.get('username'),
                 email = form.cleaned_data.get('email'),
-                password = form.cleaned_data.get('password'),
                 branch = form.cleaned_data.get('branch'),
                 birth = form.cleaned_data.get('birth'),
             )
+            user.set_password(form.cleaned_data.get('password'))
             user.save()
-            return HttpResponseRedirect('profile')
+            return index(request)
     else:
         form = registerForm()
     return render (request, 'register.html', {'form' : form})

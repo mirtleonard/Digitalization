@@ -55,6 +55,7 @@ def updateReport(request, report_id):
             return viewReport(request, report_id)
     context = {
         'report' : form,
+        'path' : 'updateReport',
     }
     return render(request, 'editReport.html', context)
 

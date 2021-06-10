@@ -47,3 +47,7 @@ class reportForm(Style):
             'duration' : 'Durată',
             'participants' : 'Participanți'
         }
+
+class reportFilter(reportForm):
+    class Meta:
+        exclude = ()
