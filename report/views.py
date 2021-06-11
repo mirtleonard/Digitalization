@@ -1,8 +1,8 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404
+from report.forms import reportForm, EventReportForm
 from django.contrib import messages
-from report.forms import reportForm
 from report.models import Report
 from django.urls import reverse
 from django.db.models import Q
@@ -32,6 +32,30 @@ def createReport(request):
     context = {
         'report' : form,
         'path' : 'createReport',
+        'type' : 'Activitate',
+    }
+    return render(request, 'editReport.html', context)
+
+@login_required
+def createEventReport(request):
+    if request.method == 'POST':
+        form = EventReportForm(request.POST)
+        if (form.is_valid()):
+            report = form.save(commit=False)
+            messages.success(request, "Raportul a fost creat!")
+            user = request.user
+            user.reports += 1
+            user.save()
+            report.save()
+            return HttpResponseRedirect(reverse('profile'))
+        else:
+            messages.error(request, "Raportul nu a fost creat!")
+    else:
+        form = EventReportForm(initial = {'username' : request.user.get_username()})
+    context = {
+        'report' : form,
+        'path' : 'createReport',
+        'type' : 'Eveniment',
     }
     return render(request, 'editReport.html', context)
 
@@ -56,6 +80,7 @@ def updateReport(request, report_id):
     context = {
         'report' : form,
         'path' : 'updateReport',
+        'type' : 'Activitate',
     }
     return render(request, 'editReport.html', context)
 

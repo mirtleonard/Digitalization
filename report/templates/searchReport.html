@@ -3,6 +3,8 @@
 {%block content%}
 <div class = "d-flex flex-column justify-content-center my-3">
 
+    {{ filter.as_p}}
+
   <form class="d-flex justify-content-center" action="{% url 'searchReport' %}" method="get">
     <div class="form-outline">
       <input class="form-control" type="text" placeholder="" name="search">

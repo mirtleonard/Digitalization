@@ -1,8 +1,5 @@
 from django.forms import *
-from report.models import Report
-
-class DateInput(DateInput):
-    input_type = 'date'
+from report.models import Report, EventReport
 
 class Style(ModelForm):
     def __init__(self, *args, **kwargs):
@@ -14,11 +11,8 @@ class reportForm(Style):
     username = CharField(widget=HiddenInput())
     class Meta:
         model = Report
-        fileds = '__all__'
-        exclude = ()
+        fields = '__all__'
         widgets = {
-            'description' : Textarea(
-                attrs = {'class':'form-control'}),
             'areas' : Select(choices = (
                 ('intelectuala', 'intelectuala'),
                 ('spirituala', 'spirituala'),
@@ -30,7 +24,7 @@ class reportForm(Style):
                 ('Lupisori', 'Lupisori'),
                 ('Temerari', 'Temerari'),
                 ('Exploratori', 'Exploratori'))),
-            'date' : DateInput()
+            'date' :  DateInput(attrs={'type' : 'date'})
             }
         labels = {
             'materials' : 'Materiale necesare',
@@ -48,6 +42,23 @@ class reportForm(Style):
             'participants' : 'Participanți'
         }
 
-class reportFilter(reportForm):
+class EventReportForm(Style):
+    username = CharField(widget=HiddenInput())
     class Meta:
-        exclude = ()
+        model = EventReport
+        fields = '__all__'
+        widgets = {
+            'endDate' : DateTimeInput(attrs = {'type' : 'datetime-local',}),
+
+            'beginingDate' : DateTimeInput(attrs = {'type' : 'datetime-local',})
+        }
+        labels = {
+            'title' : 'Titlu',
+            'description' : 'Descriere',
+            'location' : 'Locație',
+            'center' : 'Centru',
+            'eventType' : 'Tip de eveniment',
+            'endDate' : 'Data de sfârșit',
+            'beginingDate' : 'Data de început',
+            'participants' : 'Participanți',
+        }
