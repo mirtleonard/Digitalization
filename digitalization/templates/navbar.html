@@ -17,19 +17,34 @@
         </i>
         Caută</a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" href="http://127.0.0.1:8000/createActivityReport">
-        <i class="fa fa-align-center">
-        </i>
-        Adaugă raport activitate
-      </a>
+    <li class="nav-item ">
+      <div class="dropdown">
+        <div class=nav-link dropdown-toggle" data-toggle="dropdown">
+          <i class="fa fa-align-center">
+          </i>
+          Vezi rapoarte
+        </div>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="http://127.0.0.1:8000/searchReport/Lupisori">Lupișori</a>
+          <a class="dropdown-item" href="http://127.0.0.1:8000/searchReport/Temerari">Temerari</a>
+          <a class="dropdown-item" href="http://127.0.0.1:8000/searchReport/Exploratori">Exploratori</a>
+          <a class="dropdown-item" href="http://127.0.0.1:8000/searchReport/Eveniment">Evenimente</a>
+        </div>
+      </div>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="http://127.0.0.1:8000/createEventReport">
-        <i class="fa fa-align-center">
-        </i>
-        Adaugă raport eveniment
-      </a>
+      <div class="dropdown">
+        <div class=nav-link dropdown-toggle" data-toggle="dropdown">
+          <i class="fa fa-align-center">
+          </i>
+          Adaugă rapoart
+        </div>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="http://127.0.0.1:8000/createActivityReport">Activitate</a>
+          <a class="dropdown-item" href="http://127.0.0.1:8000/createEventReport">Eveniment</a>
+        </div>
+      </div>
+
     </li>
     <li class="nav-item">
       <a class="nav-link" href="http://127.0.0.1:8000/logout_user">

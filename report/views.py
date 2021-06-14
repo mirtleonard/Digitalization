@@ -55,9 +55,8 @@ def createActivityReport(request):
     }
     return render(request, 'editReport.html', context)
 
-
 @login_required
-def updateReport(request, report_id):
+def updateActivityReport(request, report_id):
     if request.method == 'POST':
         form = ActivityReportForm(request.POST)
         if form.is_valid():
@@ -74,11 +73,11 @@ def updateReport(request, report_id):
         if report.username != request.user.get_username():
             messages.error(request, "Doar creatorul poate edita formularul")
             return viewReport(request, report_id)
-            context = {
-            'report' : form,
-            'path' : 'updateReport',
-            }
-            return render(request, 'editReport.html', context)
+    context = {
+        'report' : form,
+        'path' : 'updateActivityReport',
+    }
+    return render(request, 'editReport.html', context)
 
 @login_required
 def deleteReport(request, report_id):
@@ -95,11 +94,13 @@ def deleteReport(request, report_id):
         return HttpResponseRedirect(reverse('profile'))
 
 @login_required
-def searchReport(request):
+def searchReport(request, type):
     search = request.GET.get('search')
     if (not search):
         search = ""
-        reports = ActivityReport.objects.filter(Q(title__unaccent__icontains = search) |
+    if (type != 'Eveniment'):
+        reports = ActivityReport.objects.filter(branch__icontains = type)
+        reports.filter(Q(title__unaccent__icontains = search) |
         Q(username__unaccent__icontains = search) |
         Q(branch__unaccent__icontains = search) |
         Q(date__icontains = search) |
@@ -110,6 +111,12 @@ def searchReport(request):
         Q(duration__unaccent__icontains = search) |
         Q(areas__unaccent__icontains = search) |
         Q(improvements__unaccent__icontains = search))
-        if (not reports):
-            reports = ""
-        return render(request, 'searchReport.html', {'reports':reports})
+    else:
+        reports = EventReport.objects.all()
+    if (not reports):
+        reports = ""
+    context = {
+        'reports':reports,
+        'type': type
+        }
+    return render(request, 'searchReport.html', context)

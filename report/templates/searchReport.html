@@ -5,7 +5,7 @@
 
     {{ filter.as_p}}
 
-  <form class="d-flex justify-content-center" action="{% url 'searchReport' %}" method="get">
+  <form class="d-flex justify-content-center" action="{% url 'searchReport' type %}" method="get">
     <div class="form-outline">
       <input class="form-control" type="text" placeholder="" name="search">
     </div>

@@ -22,7 +22,7 @@
       <p> <b> Raport realizat de:</b> {{report.username|linebreaks}}</p>
     </div>
     <div class="card-footer">
-      <form action="{% url 'updateReport' report.id %}" id="update" method="get"></form>
+      <form action="{% url 'updateActivityReport' report.id %}" id="update" method="get"></form>
       <form action="{% url 'deleteReport' report.id %}" id="delete" method="post">{% csrf_token %}</form>
 
       <button class="btn btn-info d-inline" type="submit" form="update">Editează</button>
