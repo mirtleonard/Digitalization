@@ -1,11 +1,11 @@
 from django.contrib.auth import login, logout, authenticate
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
+from report.models import ActivityReport
 from django.contrib import messages
 from django.shortcuts import render
 from user.forms import registerForm
 from django.urls import reverse
-from report.models import Report
 from user.models import User
 
 
@@ -50,5 +50,5 @@ def logout_user(request):
 @login_required
 def profile(request):
     user = request.user
-    reports = Report.objects.filter(username = request.user.get_username()).order_by('-date')
+    reports = ActivityReport.objects.filter(username = request.user.get_username()).order_by('-date')
     return render(request, 'profile.html', {'user' : user, 'reports' : reports})

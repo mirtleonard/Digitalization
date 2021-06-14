@@ -1,5 +1,5 @@
 from django.forms import *
-from report.models import Report, EventReport
+from report.models import ActivityReport, EventReport
 
 class Style(ModelForm):
     def __init__(self, *args, **kwargs):
@@ -7,10 +7,10 @@ class Style(ModelForm):
         for field in self.fields.values():
             field.widget.attrs.update({'class':'form-control'})
 
-class reportForm(Style):
+class ActivityReportForm(Style):
     username = CharField(widget=HiddenInput())
     class Meta:
-        model = Report
+        model = ActivityReport
         fields = '__all__'
         widgets = {
             'areas' : Select(choices = (

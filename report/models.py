@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 
 
-class Report(models.Model):
+class ActivityReport(models.Model):
     username = models.CharField(max_length=240, default=" ")
     branch = models.CharField(max_length=240, default=" ")
     areas = models.CharField(max_length=240, default=" ")
@@ -31,3 +31,5 @@ class EventReport(models.Model):
     location = models.CharField(max_length=240)
     beginingDate = models.DateTimeField()
     endDate = models.DateTimeField()
+    def __str__(self):
+        return self.title
