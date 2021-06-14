@@ -9,9 +9,9 @@ from django.db.models import Q
 
 # Create your views here.
 @login_required
-def viewReport(request, report_id):
-    report = get_object_or_404(ActivityReport, pk=report_id)
-    return render(request, 'viewReport.html', {'report': report})
+def viewEventReport(request, report_id):
+    report = get_object_or_404(EventReport, pk=report_id)
+    return render(request, 'viewEventReport.html', {'report' : report})
 
 @login_required
 def createEventReport(request):
@@ -33,6 +33,50 @@ def createEventReport(request):
         'path' : '',
     }
     return render(request, 'editReport.html', context)
+
+@login_required
+def updateEventReport(request, report_id):
+    if request.method == 'POST':
+        form = EventReportForm(request.POST)
+        if form.is_valid():
+            messages.success(request, "Raportul a fost editat!")
+            report = form.save(commit=False)
+            report.id = report_id
+            report.save()
+            return HttpResponseRedirect(reverse('profile'))
+        else:
+            messages.error(request, "Raportul nu a fost editat")
+    else:
+        report = get_object_or_404(EventReport, pk = report_id)
+        form = EventReportForm(instance=report)
+        if report.username != request.user.get_username():
+            messages.error(request, "Doar creatorul poate edita formularul")
+            return viewEventReport(request, report_id)
+    context = {
+        'report' : form,
+        'path' : 'updateEventReport',
+        'id' : report_id,
+    }
+    return render(request, 'editReport.html', context)
+
+@login_required
+def deleteEventReport(request, report_id):
+    report = get_object_or_404(EventReport, pk = report_id)
+    if report.username != request.user.get_username():
+        messages.error(request, "Doar creatorul poate șterge formularul")
+        return viewReport(request, report_id)
+    else:
+        user = request.user
+        user.reports -= 1
+        user.save()
+        EventReport.objects.filter(id = report_id).delete()
+        messages.success(request, "Raportul a fost șters!")
+        return HttpResponseRedirect(reverse('profile'))
+
+@login_required
+def viewActivityReport(request, report_id):
+    report = get_object_or_404(ActivityReport, pk=report_id)
+    return render(request, 'viewActivityReport.html', {'report' : report})
 
 @login_required
 def createActivityReport(request):
@@ -72,15 +116,16 @@ def updateActivityReport(request, report_id):
         form = ActivityReportForm(instance=report)
         if report.username != request.user.get_username():
             messages.error(request, "Doar creatorul poate edita formularul")
-            return viewReport(request, report_id)
+            return viewActivityReport(request, report_id)
     context = {
         'report' : form,
         'path' : 'updateActivityReport',
+        'id' : report_id,
     }
     return render(request, 'editReport.html', context)
 
 @login_required
-def deleteReport(request, report_id):
+def deleteActivityReport(request, report_id):
     report = get_object_or_404(ActivityReport, pk = report_id)
     if report.username != request.user.get_username():
         messages.error(request, "Doar creatorul poate șterge formularul")
@@ -100,6 +145,7 @@ def searchReport(request, type):
         search = ""
     if (type != 'Eveniment'):
         reports = ActivityReport.objects.filter(branch__icontains = type)
+        type = 'activityReport'
         reports.filter(Q(title__unaccent__icontains = search) |
         Q(username__unaccent__icontains = search) |
         Q(branch__unaccent__icontains = search) |
@@ -112,6 +158,7 @@ def searchReport(request, type):
         Q(areas__unaccent__icontains = search) |
         Q(improvements__unaccent__icontains = search))
     else:
+        type = 'eventReport'
         reports = EventReport.objects.all()
     if (not reports):
         reports = ""

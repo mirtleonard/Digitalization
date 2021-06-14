@@ -3,7 +3,7 @@
 {%block content%}
 <div class = "d-flex flex-column justify-content-center my-3">
 
-    {{ filter.as_p}}
+  {{ filter.as_p}}
 
   <form class="d-flex justify-content-center" action="{% url 'searchReport' type %}" method="get">
     <div class="form-outline">
@@ -57,11 +57,10 @@
                 <label>Locatia:</label>
               </div>
 
-              </div>
             </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-primary">Aplica</button>
-            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary">Aplica</button>
           </div>
         </div>
       </div>
@@ -75,7 +74,7 @@
       {% if reports %}
       {% for report in reports%}
       <div class="card m-2">
-        <div class="card-header"><a href= "reports/{{report.id}}">{{report.title}}</a></div>
+        <div class="card-header"><a href= "http://127.0.0.1:8000/{{type}}/{{report.id}}">{{report.title}}</a></div>
         <div data-offset="50" class="card-body" style="overflow-x : auto; max-height : 10vh ">{{report.branch}}</div>
         <div class="card-footer">
           {{report.date}}
@@ -87,7 +86,5 @@
       {% endif %}
     </div>
   </div>
-</div>
-
 </div>
 {%endblock%}

@@ -1,3 +1,4 @@
+
 {%extends "base.html" %}
 {%block title%}{{report.title}}{%endblock%}
 {%block content%}
@@ -7,23 +8,18 @@
       <h1>{{report.title}}</h1>
     </div>
     <div class="card-body">
-      <p> <b>Ramura de vârstă:</b> {{report.branch}}</p><br>
-      <p> <b>Aria de dezvoltare:</b> {{report.areas}}</p><br>
-      <p> <b>Loc de desfășurare:  </b>  {{report.location}}</p><br>
-      <p> <b>Data:  </b>  {{report.date}}</p><br>
-      <p> <b>Durata:</b>  {{report.duration}}</p><br>
-      <p> <b>Număr de participanți: </b> {{report.participants}} </p> <br>
-      <p> <b>Materiale necesare: </b> {{report.materials|linebreaks}} </p> <br>
-      <p> <b>Obiectivele activității: </b> {{report.goals|linebreaks}} </p> <br>
-      <p> <b> Descrierea activității:</b> <br> {{report.description|linebreaks}}</p><br>
-      <p> <b> Puncte tari:</b> <br> {{report.strengths|linebreaks}}</p>
-      <p> <b> Puncte slabe:</b> <br> {{report.weaknesses|linebreaks}}</p>
-      <p> <b> Îmbunătățiri:</b> <br> {{report.improvements|linebreaks}}</p>
+      <p> <b>Centru:</b> {{report.centru}}</p><br>
+      <p> <b>Tip de eveniment:  </b>  {{report.location}}</p><br>
+      <p> <b>Membrii: </b> {{report.participants}} </p> <br>
+      <p> <b> Descrierea evenimentului:</b> <br> {{report.description|linebreaks}}</p><br>
+      <p> <b>Locație:</b>  {{report.duration}}</p><br>
+      <p> <b>Data de început:  </b>  {{report.date}}</p><br>
+      <p> <b>Data de sfârșit:  </b>  {{report.date}}</p><br>
       <p> <b> Raport realizat de:</b> {{report.username|linebreaks}}</p>
     </div>
     <div class="card-footer">
-      <form action="{% url 'updateActivityReport' report.id %}" id="update" method="get"></form>
-      <form action="{% url 'deleteReport' report.id %}" id="delete" method="post">{% csrf_token %}</form>
+      <form action="{% url 'updateEventReport' report.id %}" id="update" method="get"></form>
+      <form action="{% url 'deleteEventReport' report.id %}" id="delete" method="post">{% csrf_token %}</form>
 
       <button class="btn btn-info d-inline" type="submit" form="update">Editează</button>
       <button type="button" class="btn btn-info float-right" data-toggle="modal" data-target="#validate">Șterge</button>
