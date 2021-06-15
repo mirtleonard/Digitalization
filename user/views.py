@@ -1,7 +1,8 @@
 from django.contrib.auth import login, logout, authenticate
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
-from report.models import ActivityReport, EventReport
+from activityReport.models import ActivityReport
+from eventReport.models import EventReport
 from django.contrib import messages
 from django.shortcuts import render
 from user.forms import registerForm

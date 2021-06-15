@@ -91,7 +91,7 @@
                     {% for report in EventReports%}
                       <div class="card m-2">
                         <div class="card-header"><a href= "{% url 'viewEventReport' report.id %}" >{{report.title}}</a></div>
-                        <div data-offset="50" class="card-body" style="overflow-x : auto; max-height : 10vh ">{{report.members}}</div>
+                        <div data-offset="50" class="card-body" style="overflow-x : auto; max-height : 10vh ">{{report.center}}</div>
                         <div class="card-footer">
                           {{report.date}}
                         </div>

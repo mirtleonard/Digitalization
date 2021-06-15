@@ -1,0 +1,18 @@
+{%extends "base.html" %}
+{%block title%}Raport activitate{%endblock%}
+{%block content%}
+  <div class="container d-flex justify-content-center">
+    <div class="card my-5 bg-white" style="width:600px">
+      <h5 class="card-header">Raport activitate</h5>
+
+      <form class="card-body" action="{{path}}" method="post">
+        {% csrf_token %}
+        {{report.as_p}}
+        <div class="d-flex justify-content-center">
+          <button class="btn btn-info" type="submit"> Adaugă raport </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+{%endblock%}

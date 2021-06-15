@@ -5,7 +5,7 @@
       <img src="{% static 'img/logo.png'%}" alt="logo" style="width:50px; height:50px">
     </li>
     <li class="nav-item">
-      <a href="http://127.0.0.1:8000/profile" class="nav-link">
+      <a href="{%url 'profile'%}" class="nav-link">
         <i class="fa fw fa-user">
         </i>
         Profil
@@ -17,11 +17,11 @@
           </i>
           Vezi rapoarte
         </div>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" href="http://127.0.0.1:8000/searchReport/Lupisori">Lupișori</a>
-          <a class="dropdown-item" href="http://127.0.0.1:8000/searchReport/Temerari">Temerari</a>
-          <a class="dropdown-item" href="http://127.0.0.1:8000/searchReport/Exploratori">Exploratori</a>
-          <a class="dropdown-item" href="http://127.0.0.1:8000/searchReport/Eveniment">Evenimente</a>
+        <div class="dropdown-menu bg-dark">
+          <a class="dropdown-item text-white" href="{%url 'searchActivityReports' 'Lupisori'%}">Lupișori</a>
+          <a class="dropdown-item text-white" href="{%url 'searchActivityReports' 'Temerari'%}">Temerari</a>
+          <a class="dropdown-item text-white" href="{%url 'searchActivityReports' 'Exploratori'%}">Exploratori</a>
+          <a class="dropdown-item text-white" href="{%url 'searchEventReports'%}">Evenimente</a>
         </div>
       </div>
     </li>
@@ -32,15 +32,15 @@
           </i>
           Adaugă rapoart
         </div>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" href="http://127.0.0.1:8000/createActivityReport">Activitate</a>
-          <a class="dropdown-item" href="http://127.0.0.1:8000/createEventReport">Eveniment</a>
+        <div class="dropdown-menu bg-dark">
+          <a class="dropdown-item text-white" href="{%url 'createActivityReport'%}">Activitate</a>
+          <a class="dropdown-item text-white" href="{%url 'createEventReport'%}">Eveniment</a>
         </div>
       </div>
 
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="http://127.0.0.1:8000/logout_user">
+      <a class="nav-link" href="{%url 'logout_user'%}">
         <i class="fa fa-sign-out-alt"></i>
         Logout
       </a>

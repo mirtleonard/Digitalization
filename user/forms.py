@@ -1,15 +1,11 @@
 from django.forms import *
-from report.forms import Style
 from user.models import User
 
-class DateInput(DateInput):
-    input_type = 'date'
-
-class registerForm(Style):
+class registerForm(ModelForm):
     confirm_password = CharField(widget=PasswordInput(), required=True, label=('Repeta parola'))
     password = CharField(widget=PasswordInput(), required=True, label=('Parola'))
+    birth = DateField(widget=DateInput(attrs = {'type' : 'date'}))
     username = CharField(required=True, label=('Nume'))
-    birth = DateField(widget=DateInput())
     class Meta:
         model = User
         fields = ['username', 'email', 'branch','birth', 'password']
