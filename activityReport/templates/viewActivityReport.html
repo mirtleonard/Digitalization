@@ -1,12 +1,15 @@
 {%extends "base.html" %}
 {%block title%}{{report.title}}{%endblock%}
 {%block content%}
-<div class="containter d-flex justify-content-center">
+{%load static%}
+<div class="containter d-flex justify-content-center m-3">
   <div class="card my-5" style="width:600px">
     <div class="card-header">
-      <h1>{{report.title}}</h1>
+      <img  class="d-inline float-left" src="{% static 'img/scout.png'%}" alt="logo" id='scout' style="width: 150px; height: 60px;">
+      <img  class="d-inline float-right" src="{% static 'img/logo.png'%}" alt="logo" id='scout' style="width: 60px; height: 60px;">
     </div>
     <div class="card-body">
+      <h3 class="text-center">{{report.title}}</h3>
       <p> <b>Ramura de vârstă:</b> {{report.branch}}</p><br>
       <p> <b>Aria de dezvoltare:</b> {{report.areas}}</p><br>
       <p> <b>Loc de desfășurare:  </b>  {{report.location}}</p><br>

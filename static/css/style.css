@@ -1,6 +1,9 @@
-.navbar-nav .nav-item .nav-link { color: red; } 
-.navbar-nav .nav-item.active .nav-link, .navbar-nav .nav-item:hover .nav-link { color: pink; }
-
+.dropdown-menu a:hover{
+  background-color:  #5bc0de;
+}
+.dropdown-item {
+  font-size : 20px;
+}
 .emp-profile{
   padding: 3%;
   margin-top: 3%;
@@ -23,7 +26,7 @@
   border: none;
   border-radius: 0;
   font-size: 15px;
-  background: #212529b8;
+  background: #5bc0de;
 }
 .profile-img .file input {
   position: absolute;

@@ -2,26 +2,28 @@
 {%block title%} Login {%endblock%}
 {%block navbar%}{%endblock%}
 {%block content%}
-  <div class="container d-flex justify-content-center">
-    <div class="card" style="margin-top:20VH; width:70%">
-      <h5 class="card-header bg">Autentificare</h5>
-      <div class="card-body">
-        <form action="{% url 'login_user' %}" id="login" method="POST">
-          {% csrf_token %}
-          <div class="form-group">
-            <label>Nume:</label>
-            <input class="form-control" placeholder="" name="username">
-          </div>
-          <div class="form-group">
-            <label>Parola:</label>
-            <input type="password" class="form-control" name="password">
-          </div>
-        </form>
-        <form id="register" action="{% url 'register' %}" method="GET">
-        </form>
-          <button type="submit" form="login" class="btn btn-info d-inline">Login</button>
-          <button type="submit" form="register" class="btn btn-info d-inline float-right">Register</button>
-      </div>
+<div class="container d-flex justify-content-center">
+  <div class="card" style="margin-top:20VH; width:70%">
+    <h5 class="card-header bg">Autentificare</h5>
+    <div class="card-body">
+      <form action="{% url 'login_user' %}" id="login" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+          <label>Nume:</label>
+          <input class="form-control" placeholder="" name="username">
+        </div>
+        <div class="form-group">
+          <label>Parola:</label>
+          <input type="password" class="form-control" name="password">
+        </div>
+      </form>
+      <form id="register" action="{% url 'register' %}" method="GET">
+      </form>
     </div>
-{%endblock%}
-{%block footer%}{%endblock%}
+    <div class="card-footer">
+      <button type="submit" form="login" class="btn btn-info d-inline">Login</button>
+      <button type="submit" form="register" class="btn btn-info d-inline float-right">Register</button>
+    </div>
+  </div>
+  {%endblock%}
+  {%block footer%}{%endblock%}

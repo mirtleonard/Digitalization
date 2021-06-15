@@ -21,9 +21,5 @@ class EventReportForm(ModelForm):
             'eventType' : 'Tip de eveniment',
             'endDate' : 'Data de sfârșit',
             'beginingDate' : 'Data de început',
-            'participants' : 'Participanți',
+            'members' : 'Participanți',
         }
-    def __init__(self, *args, **kargs):
-        super().__init__(*args, **kargs)
-        self.helper = FormHelper()
-        self.helper.add_input(Submit('submit', 'Adaugă raport', css_class='btn btn-info d-flex justify-content-center'))

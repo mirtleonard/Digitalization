@@ -1,13 +1,7 @@
 from django.forms import *
 from activityReport.models import ActivityReport
 
-class Style(ModelForm):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for field in self.fields.values():
-            field.widget.attrs.update({'class':'form-control'})
-
-class ActivityReportForm(Style):
+class ActivityReportForm(ModelForm):
     username = CharField(widget=HiddenInput())
     class Meta:
         model = ActivityReport

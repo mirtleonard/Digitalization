@@ -21,7 +21,7 @@ def createActivityReport(request):
             form.save()
             messages.success(request, "Raportul a fost creat!")
             user = request.user
-            user.reports += 1
+            user.activityReports += 1
             user.save()
             return HttpResponseRedirect(reverse('profile'))
         else:
@@ -66,7 +66,7 @@ def deleteActivityReport(request, report_id):
         return viewReport(request, report_id)
     else:
         user = request.user
-        user.reports -= 1
+        user.activityReports -= 1
         user.save()
         ActivityReport.objects.filter(id = report_id).delete()
         messages.success(request, "Raportul a fost șters!")
