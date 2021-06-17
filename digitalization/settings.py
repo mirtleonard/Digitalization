@@ -44,8 +44,7 @@ INSTALLED_APPS = [
     'eventReport',
     'user',
 ]
-
-CRISPY_TEMPLATE_PACK = 'bootstrap3'
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -84,12 +83,12 @@ WSGI_APPLICATION = 'digitalization.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME':  'digitalization',
-        'USER': 'postgres',
-        'PASSWORD': '',
-        'HOST' : 'localhost',
-        'PORT' : '5432',
+        'ENGINE':  'django.db.backends.postgresql',
+        'NAME':    'digitalization',
+        'USER':    'postgres',
+        'PASSWORD':'',
+        'HOST':    'localhost',
+        'PORT':    '5432',
     }
 }
 

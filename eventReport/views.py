@@ -1,6 +1,7 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404
+from eventReport.filters import EventReportFilter
 from eventReport.forms import EventReportForm
 from eventReport.models import EventReport
 from django.contrib import messages
@@ -74,12 +75,7 @@ def deleteEventReport(request, report_id):
 
 @login_required
 def searchEventReports(request):
-    search = request.GET.get('search')
-    if (not search):
-        search = ""
-    reports = EventReport.objects.all()
-    if (not reports):
-        reports = ""
+    reports = EventReportFilter(request.GET)
     context = {
         'reports':reports,
     }

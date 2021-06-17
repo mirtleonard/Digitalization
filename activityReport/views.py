@@ -1,11 +1,12 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
+from activityReport.filters import ActivityReportFilter
 from django.shortcuts import render, get_object_or_404
 from activityReport.forms import ActivityReportForm
 from activityReport.models import ActivityReport
+from django.views.generic import ListView
 from django.contrib import messages
 from django.urls import reverse
-from django.db.models import Q
 
 # Create your views here.
 @login_required
@@ -32,7 +33,7 @@ def createActivityReport(request):
         'report' : form,
         'path' : 'createActivityReport',
     }
-    return render(request, 'editReport.html', context)
+    return render(request, 'editActivityReport.html', context)
 
 @login_required
 def updateActivityReport(request, report_id):
@@ -56,7 +57,7 @@ def updateActivityReport(request, report_id):
         'report' : form,
         'path' : str(report_id),
     }
-    return render(request, 'editReport.html', context)
+    return render(request, 'editActivityReport.html', context)
 
 @login_required
 def deleteActivityReport(request, report_id):
@@ -74,25 +75,9 @@ def deleteActivityReport(request, report_id):
 
 @login_required
 def searchActivityReports(request, branch):
-    search = request.GET.get('search')
-    if (not search):
-        search = ""
-    reports = ActivityReport.objects.filter(branch__icontains = branch)
-    reports.filter(Q(title__unaccent__icontains = search) |
-    Q(username__unaccent__icontains = search) |
-    Q(branch__unaccent__icontains = search) |
-    Q(date__icontains = search) |
-    Q(description__unaccent__icontains = search) |
-    Q(goals__unaccent__icontains = search) |
-    Q(strengths__unaccent__icontains = search) |
-    Q(weaknesses__unaccent__icontains = search) |
-    Q(duration__unaccent__icontains = search) |
-    Q(areas__unaccent__icontains = search) |
-    Q(improvements__unaccent__icontains = search))
-    if (not reports):
-        reports = ""
+    reports = ActivityReportFilter(request.GET, branch)
     context = {
-        'reports':reports,
+        'reports': reports,
         'branch' : branch,
     }
     return render(request, 'searchActivityReports.html', context)
