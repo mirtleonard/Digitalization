@@ -1,0 +1,22 @@
+{%extends "base.html" %}
+{% load crispy_forms_tags %}
+{%load static%}
+{%block title%} Task {%endblock%}
+{%block content%}
+<div class="container d-flex justify-content-center">
+  <div class="card bg-white" style="width:600px; margin-top : 10VH; margin-bottom: 10VH">
+    <div class="card-header">
+      Task
+    </div>
+    <div class="card-body">
+      <form id="task" action="{%url 'createTask'%}" method="post">
+        {%csrf_token%}
+        {{form|crispy}}
+      </form>
+    </div>
+    <div class="card-footer">
+      <button type="submit" form="task" class="btn btn-info">Adaugă task</button>
+    </div>
+  </div>
+</div>
+{%endblock%}

@@ -4,7 +4,6 @@ from activityReport.filters import ActivityReportFilter
 from django.shortcuts import render, get_object_or_404
 from activityReport.forms import ActivityReportForm
 from activityReport.models import ActivityReport
-from django.views.generic import ListView
 from django.contrib import messages
 from django.urls import reverse
 
