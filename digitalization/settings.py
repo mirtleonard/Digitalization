@@ -39,10 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.postgres',
     'django_filters',
-    'activityReport',
     'crispy_forms',
+    'activityReport',
     'eventReport',
     'user',
+    'task',
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
