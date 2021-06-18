@@ -17,7 +17,7 @@ def viewActivityReport(request, report_id):
 @login_required
 def createActivityReport(request):
     if request.method == 'POST':
-        form = ActivityReportForm(request.POST)
+        form = ActivityReportForm(request.POST or None, request.FILES or None)
         if form.is_valid():
             form.save()
             messages.success(request, "Raportul a fost creat!")

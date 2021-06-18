@@ -53,7 +53,6 @@ def profile(request):
     user = request.user
     ActivityReports = ActivityReport.objects.filter(username = request.user.get_username()).order_by('-date')
     EventReports = EventReport.objects.filter(username = request.user.get_username()).order_by('-beginingDate')
-    print(ActivityReports, EventReports)
     context = {
         'user' : user,
         'ActivityReports' : ActivityReports,

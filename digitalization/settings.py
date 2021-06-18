@@ -152,3 +152,7 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS=[
     STATIC_DIR,
 ]
+
+import os
+MEDIA_URL = "media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, 'activityReport/')
