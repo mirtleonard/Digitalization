@@ -1,22 +1,21 @@
-{%extends "base.html" %}
-{%block title%}Raport activitate{%endblock%}
-{%load crispy_forms_tags%}
-{%block content%}
-{%load static%}
-  <div class="container d-flex justify-content-center">
-    <div class="card my-5 bg-white" style="width:600px">
-      <div class="card-header">
-        <img  class="d-inline float-left" src="{% static 'img/scout.png'%}" alt="logo" id='scout' style="width: 150px; height: 60px;">
-        <img  class="d-inline float-right" src="{% static 'img/logo.png'%}" alt="logo" id='scout' style="width: 60px; height: 60px;">
-      </div>
-      <form class="card-body" action="{{path}}" enctype="multipart/form-data"  method="post" id='report'>
-        {% csrf_token %}
-        {{report|crispy}}
-      </form>
-      <div class="d-flex justify-content-center card-footer">
-        <button class="btn btn-info" form='report' type="submit"> Adaugă raport </button>
-      </div>
+{% extends "base.html" %}
+{% block title %}Raport activitate{% endblock %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% load static %}
+<div class="container d-flex justify-content-center">
+  <div class="card my-5 bg-white" style="width:600px">
+    <div class="card-header">
+      <img class="d-inline float-left" src="{% static 'img/scout.png' %}" alt="logo" id='scout' style="width: 150px; height: 60px;">
+      <img class="d-inline float-right" src="{% static 'img/logo.png' %}" alt="logo" id='scout' style="width: 60px; height: 60px;">
+    </div>
+    <form class="card-body" action="{{path}}" enctype="multipart/form-data"  method="post" id='report'>
+      {% csrf_token %}
+      {{report|crispy}}
+    </form>
+    <div class="d-flex justify-content-center card-footer">
+      <button class="btn btn-info" form='report' type="submit"> Adaugă raport </button>
     </div>
   </div>
-</body>
-{%endblock%}
+</div>
+{% endblock %}

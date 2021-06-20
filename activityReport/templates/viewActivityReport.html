@@ -1,36 +1,35 @@
-{%extends "base.html" %}
-{%block title%}{{report.title}}{%endblock%}
-{%block content%}
-{%load static%}
+{% extends "base.html" %}
+{% block title %}{{report.title}}{% endblock %}
+{% block content %}
+{% load static %}
 <div class="containter d-flex justify-content-center m-3">
   <div class="card my-5" style="width:600px">
     <div class="card-header">
-      <img  class="d-inline float-left" src="{% static 'img/scout.png'%}" alt="logo" id='scout' style="width: 150px; height: 60px;">
-      <img  class="d-inline float-right" src="{% static 'img/logo.png'%}" alt="logo" id='scout' style="width: 60px; height: 60px;">
+      <img  class="d-inline float-left" src="{% static 'img/scout.png' %}" alt="logo" id='scout' style="width: 150px; height: 60px;">
+      <img  class="d-inline float-right" src="{% static 'img/logo.png' %}" alt="logo" id='scout' style="width: 60px; height: 60px;">
     </div>
     <div class="card-body">
       <h3 class="text-center">{{report.title}}</h3>
-      <p> <b>Ramura de vârstă:</b> {{report.branch}}</p><br>
-      <p> <b>Aria de dezvoltare:</b> {{report.areas}}</p><br>
-      <p> <b>Loc de desfășurare:  </b>  {{report.location}}</p><br>
-      <p> <b>Data:  </b>  {{report.date}}</p><br>
-      <p> <b>Durata:</b>  {{report.duration}}</p><br>
-      <p> <b>Număr de participanți: </b> {{report.participants}} </p> <br>
-      <p> <b>Materiale necesare: </b> {{report.materials|linebreaks}} </p> <br>
-      <p> <b>Obiectivele activității: </b> {{report.goals|linebreaks}} </p> <br>
-      <p> <b> Descrierea activității:</b> <br> {{report.description|linebreaks}}</p><br>
-      <p> <b> Puncte tari:</b> <br> {{report.strengths|linebreaks}}</p>
-      <p> <b> Puncte slabe:</b> <br> {{report.weaknesses|linebreaks}}</p>
-      <p> <b> Îmbunătățiri:</b> <br> {{report.improvements|linebreaks}}</p>
-      <p> <b> Raport realizat de:</b> {{report.username|linebreaks}}</p>
-      {%if report.photo%}
+      <p><b>Ramura de vârstă:</b>{{report.branch}}</p><br>
+      <p><b>Aria de dezvoltare:</b>{{report.areas}}</p><br>
+      <p><b>Loc de desfășurare:  </b>{{report.location}}</p><br>
+      <p><b>Data:  </b>{{report.date}}</p><br>
+      <p><b>Durata:</b>{{report.duration}}</p><br>
+      <p><b>Număr de participanți: </b>{{report.participants}}</p> <br>
+      <p><b>Materiale necesare: </b>{{report.materials|linebreaks}} </p> <br>
+      <p><b>Obiectivele activității: </b>{{report.goals|linebreaks}} </p> <br>
+      <p><b> Descrierea activității:</b><br>{{report.description|linebreaks}}</p><br>
+      <p><b> Puncte tari:</b> <br>{{report.strengths|linebreaks}}</p>
+      <p><b> Puncte slabe:</b> <br>{{report.weaknesses|linebreaks}}</p>
+      <p><b> Îmbunătățiri:</b> <br>{{report.improvements|linebreaks}}</p>
+      <p><b> Raport realizat de:</b> {{report.username|linebreaks}}</p>
+      {% if report.photo %}
         <img src="{{report.photo.url}}" alt="" class="img-fluid">
-      {%endif%}
+      {% endif %}
     </div>
     <div class="card-footer">
       <form action="{% url 'updateActivityReport' report.id %}" id="update" method="get"></form>
       <form action="{% url 'deleteActivityReport' report.id %}" id="delete" method="post">{% csrf_token %}</form>
-
       <button class="btn btn-info d-inline" type="submit" form="update">Editează</button>
       <button type="button" class="btn btn-info float-right" data-toggle="modal" data-target="#validate">Șterge</button>
     </div>
@@ -57,4 +56,4 @@
   </div>
 
 </div>
-{%endblock%}
+{% endblock %}

@@ -8,8 +8,8 @@ class EventReport(models.Model):
     eventType = models.CharField(max_length = 100)
     title = models.CharField(max_length = 100)
     members = models.CharField(max_length = 1000)
-    description = models.TextField(max_length = 10000)
     location = models.CharField(max_length=240)
+    description = models.TextField()
     beginingDate = models.DateTimeField()
     endDate = models.DateTimeField()
     def __str__(self):

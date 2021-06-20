@@ -7,6 +7,7 @@ from activityReport.models import ActivityReport
 from django.contrib import messages
 from task.forms import TaskForm
 from django.urls import reverse
+from task.mail import sendMail
 
 # Create your views here.
 @login_required
@@ -15,6 +16,5 @@ def createTask(request):
     if form.is_valid():
         form.save()
         return HttpResponseRedirect('profile')
-    else :
-        context = {'form' : form}
-        return render(request, 'createTask.html', context)
+    context = {'form' : form}
+    return render(request, 'createTask.html', context)

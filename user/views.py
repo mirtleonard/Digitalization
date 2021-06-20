@@ -7,6 +7,7 @@ from django.contrib import messages
 from django.shortcuts import render
 from user.forms import registerForm
 from django.urls import reverse
+from task.models import Task
 from user.models import User
 
 
@@ -53,9 +54,11 @@ def profile(request):
     user = request.user
     ActivityReports = ActivityReport.objects.filter(username = request.user.get_username()).order_by('-date')
     EventReports = EventReport.objects.filter(username = request.user.get_username()).order_by('-beginingDate')
+    Tasks = Task.objects.filter(user = request.user.id).order_by('-dueDate')
     context = {
         'user' : user,
-        'ActivityReports' : ActivityReports,
         'EventReports' : EventReports,
+        'ActivityReports' : ActivityReports,
+        'Tasks' : Tasks,
     }
     return render(request, 'profile.html', context)

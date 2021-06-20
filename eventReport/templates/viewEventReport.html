@@ -1,28 +1,30 @@
-{%extends "base.html" %}
-{%block title%}{{report.title}}{%endblock%}
-{%block content%}
-{%load static%}
+{% extends "base.html" %}
+{% block title %}{{report.title}}{% endblock %}
+{% block content %}
+{% load static %}
 <div class="containter d-flex justify-content-center mx-3">
   <div class="card my-5" style="width:600px">
+
     <div class="card-header ">
       <img  class="d-inline float-left" src="{% static 'img/scout.png'%}" alt="logo" id='scout' style="width: 150px; height: 60px;">
       <img  class="d-inline float-right" src="{% static 'img/logo.png'%}" alt="logo" id='scout' style="width: 60px; height: 60px;">
     </div>
+
     <div class="card-body">
       <h3 class="d-flex justify-content-center">{{report.title}}</h3>
-      <p> <b>Centru:</b> {{report.center}}</p><br>
-      <p> <b>Tip de eveniment:  </b>  {{report.eventType}}</p><br>
-      <p> <b>Participanți: </b> {{report.members}} </p> <br>
-      <p> <b> Descrierea evenimentului:</b> <br> {{report.description|linebreaks}}</p><br>
-      <p> <b>Locație:</b>  {{report.location}}</p><br>
-      <p> <b>Data de început:  </b>  {{report.beginingDate}}</p><br>
-      <p> <b>Data de sfârșit:  </b>  {{report.endDate}}</p><br>
-      <p> <b> Raport realizat de:</b> {{report.username|linebreaks}}</p>
+      <p><b>Centru:</b> {{report.center}}</p><br>
+      <p><b>Tip de eveniment:  </b>{{report.eventType}}</p><br>
+      <p><b>Participanți: </b> {{report.members}} </p> <br>
+      <p><b> Descrierea evenimentului:</b> <br> {{report.description|linebreaks}}</p><br>
+      <p><b>Locație:</b>  {{report.location}}</p><br>
+      <p><b>Data de început:  </b>  {{report.beginingDate}}</p><br>
+      <p><b>Data de sfârșit:  </b>  {{report.endDate}}</p><br>
+      <p><b> Raport realizat de:</b> {{report.username|linebreaks}}</p>
     </div>
+
     <div class="card-footer">
       <form action="{% url 'updateEventReport' report.id %}" id="update" method="get"></form>
       <form action="{% url 'deleteEventReport' report.id %}" id="delete" method="post">{% csrf_token %}</form>
-
       <button class="btn btn-info d-inline" type="submit" form="update">Editează</button>
       <button type="button" class="btn btn-info float-right" data-toggle="modal" data-target="#validate">Șterge</button>
     </div>
@@ -47,6 +49,6 @@
       </div>
     </div>
   </div>
-
+  
 </div>
-{%endblock%}
+{% endblock %}

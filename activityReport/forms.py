@@ -3,6 +3,7 @@ from activityReport.models import ActivityReport
 
 class ActivityReportForm(ModelForm):
     username = CharField(widget=HiddenInput())
+    photos = FileField(required=False, widget=FileInput(attrs = {'multiple' : True}), label="Imagini")
     class Meta:
         model = ActivityReport
         fields = '__all__'
@@ -19,7 +20,7 @@ class ActivityReportForm(ModelForm):
                 ('Temerari', 'Temerari'),
                 ('Exploratori', 'Exploratori'))),
             'date' :  DateInput(attrs={'type' : 'date'})
-            }
+        }
         labels = {
             'materials' : 'Materiale necesare',
             'title' : 'Titlu',

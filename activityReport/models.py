@@ -12,12 +12,11 @@ class ActivityReport(models.Model):
     date = models.DateField()
     duration = models.CharField(max_length=240, default=" ")
     participants = models.CharField(max_length=240, default=" ")
-    materials = models.CharField(max_length=240, default=" ")
-    goals = models.TextField(max_length=240, default=" ")
-    description = models.CharField(max_length=5000)
+    materials = models.TextField()
+    goals = models.TextField()
+    description = models.TextField()
     strengths = models.TextField()
     weaknesses = models.TextField()
     improvements = models.TextField()
-    photo = models.ImageField(upload_to='media', null=True, blank=True)
     def __str__(self):
         return self.title

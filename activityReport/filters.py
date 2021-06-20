@@ -15,11 +15,11 @@ class ActivityReportFilter(django_filters.FilterSet):
                 }
             }
         }
-    def __init__(self, request, branch,*args, **kwargs):
+    def __init__(self, request, branch, *args, **kwargs):
         super().__init__(request, *args, **kwargs)
         self.branch = branch
-        self.filters['title'].label = "Titlu"
         self.filters['areas'].label = "Arie de dezvoltare"
+        self.filters['title'].label = "Titlu"
         self.filters['username'].label = "Autor"
         self.filters['location'].label = "Locație"
 

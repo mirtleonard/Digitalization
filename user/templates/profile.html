@@ -2,112 +2,138 @@
 {%load static%}
 {%block title%} {{ user.username }} {%endblock%}
 {%block content%}
-  <div class="container"  style="max-width:700px">
-    <div class="container emp-profile d-flex flex-row justify-content-center" >
-      <div class="d-flex flex-column all">
-        <div class="profile-img my-5">
-          <img src="{% static 'img/user.png' %} " alt="user"/ style="max-width:170px; max-height:80px">
-        </div>
+<div class="container"  style="max-width:700px">
+  <div class="container emp-profile d-flex flex-row justify-content-center" >
+    <div class="d-flex flex-column all">
+      <div class="profile-img my-5">
+        <img src="{% static 'img/user.png' %} " alt="user"/ style="max-width:170px; max-height:80px">
       </div>
-    </div>
-
-    <div class="container emp-profile d-flex justify-content-center">
-      <div class="d-flex flex-column profile-head mx-5">
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-          <li class="nav-item">
-            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="true">Despre</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#activity" role="tab" aria-controls="activity" aria-selected="false">Rapoarte Activitate: {{user.activityReports}}</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#event" role="tab" aria-controls="event" aria-selected="false">Rapoarte Eveniment: {{user.eventReports}}</a>
-          </li>
-        </ul>
-        <div class="tab-content profile-tab" id="TabContent">
-          <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="home-tab">
-              <div class="row">
-                <div class="col-md-6">
-                <label>Nume</label>
-
-              </div>
-              <div class="col-md-6">
-                <p>{{user.username}}</p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <label>Ramură</label>
-              </div>
-              <div class="col-md-6">
-                <p>{{user.branch}}</p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <label>Email</label>
-              </div>
-              <div class="col-md-6">
-                <p>{{user.email}}</p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <label>Data de nastere:</label>
-              </div>
-              <div class="col-md-6">
-                <p>{{user.birth}}</p>
-              </div>
-            </div>
-          </div>
-          <div class="tab-pane fade" id="activity" role="tabpanel" aria-labelledby="activity-tab">
-            <div class="container d-flex justify-content-center" style="min-height: 30VH;" id="result">
-              <div style=" width:350PX">
-                <div class="d-flex flex-column" style="overflow-x : auto; max-height : 30VH">
-                  {% if ActivityReports %}
-                    {% for report in ActivityReports%}
-                      <div class="card m-2">
-                        <div class="card-header"><a href= "{% url 'viewActivityReport' report.id %}" >{{report.title}}</a></div>
-                        <div data-offset="50" class="card-body" style="overflow-x : auto; max-height : 10vh ">{{report.branch}}</div>
-                        <div class="card-footer">
-                          {{report.date}}
-                        </div>
-                      </div>
-                    {%endfor%}
-                  {% else %}
-                    <h3 class="d-flex justify-content-center">Nu exista nici un raport </h3>
-                  {% endif %}
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-          <div class="tab-pane fade" id="event" role="tabpanel" aria-labelledby="event-tab">
-            <div class="container d-flex justify-content-center" style="min-height: 30VH;" id="result">
-              <div style=" width:350PX">
-                <div class="d-flex flex-column" style="overflow-x : auto; max-height : 30VH">
-                  {% if EventReports %}
-                    {% for report in EventReports%}
-                      <div class="card m-2">
-                        <div class="card-header"><a href= "{% url 'viewEventReport' report.id %}" >{{report.title}}</a></div>
-                        <div data-offset="50" class="card-body" style="overflow-x : auto; max-height : 10vh ">{{report.center}}</div>
-                        <div class="card-footer">
-                          {{report.date}}
-                        </div>
-                      </div>
-                    {%endfor%}
-                  {% else %}
-                    <h3 class="d-flex justify-content-center">Nu exista nici un raport </h3>
-                  {% endif %}
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </div>
-
     </div>
   </div>
-  {%endblock%}
+
+  <div class="container emp-profile d-flex justify-content-center">
+    <div class="d-flex flex-column profile-head mx-5">
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" id="home-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="true">Despre</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="profile-tab" data-toggle="tab" href="#activity" role="tab" aria-controls="activity" aria-selected="false">Rapoarte Activitate: {{user.activityReports}}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="profile-tab" data-toggle="tab" href="#event" role="tab" aria-controls="event" aria-selected="false">Rapoarte Eveniment: {{user.eventReports}}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="profile-tab" data-toggle="tab" href="#tasks" role="tab" aria-controls="tasks" aria-selected="false">Tasks</a>
+        </li>
+      </ul>
+      <div class="tab-content profile-tab" id="TabContent">
+        <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="home-tab">
+          <div class="row">
+            <div class="col-md-6">
+              <label>Nume</label>
+
+            </div>
+            <div class="col-md-6">
+              <p>{{user.username}}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label>Ramură</label>
+            </div>
+            <div class="col-md-6">
+              <p>{{user.branch}}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label>Email</label>
+            </div>
+            <div class="col-md-6">
+              <p>{{user.email}}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label>Data de nastere:</label>
+            </div>
+            <div class="col-md-6">
+              <p>{{user.birth}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="activity" role="tabpanel" aria-labelledby="activity-tab">
+          <div class="container d-flex justify-content-center" style="min-height: 30VH;" id="result">
+            <div style=" width:350PX">
+              <div class="d-flex flex-column" style="overflow-x : auto; max-height : 30VH">
+                {% if ActivityReports %}
+                {% for report in ActivityReports%}
+                <div class="card m-2">
+                  <div class="card-header"><a href= "{% url 'viewActivityReport' report.id %}" >{{report.title}}</a></div>
+                  <div data-offset="50" class="card-body" style="overflow-x : auto; max-height : 10vh ">{{report.branch}}</div>
+                  <div class="card-footer">
+                    {{report.date}}
+                  </div>
+                </div>
+                {%endfor%}
+                {% else %}
+                <h3 class="d-flex justify-content-center">Nu exista nici un raport </h3>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="tab-pane fade" id="event" role="tabpanel" aria-labelledby="event-tab">
+          <div class="container d-flex justify-content-center" style="min-height: 30VH;" id="result">
+            <div style=" width:350PX">
+              <div class="d-flex flex-column" style="overflow-x : auto; max-height : 30VH">
+                {% if EventReports %}
+                {% for report in EventReports%}
+                <div class="card m-2">
+                  <div class="card-header"><a href= "{% url 'viewEventReport' report.id %}" >{{report.title}}</a></div>
+                  <div data-offset="50" class="card-body" style="overflow-x : auto; max-height : 10vh ">{{report.center}}</div>
+                  <div class="card-footer">
+                    {{report.date}}
+                  </div>
+                </div>
+                {%endfor%}
+                {% else %}
+                <h3 class="d-flex justify-content-center">Nu exista nici un raport </h3>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="tab-pane fade" id="tasks" role="tabpanel" aria-labelledby="tasks-tab">
+          <div class="container d-flex justify-content-center" style="min-height: 30VH;" id="result">
+            <div style=" width:350PX">
+              <div class="d-flex flex-column" style="overflow-x : auto; max-height : 30VH">
+                {% if Tasks %}
+                {% for task in Tasks%}
+                <div class="card m-2">
+                  <div class="card-header"><a href= "{{task.id}}" >{{task.title}}</a></div>
+                  <div data-offset="50" class="card-body" style="overflow-x : auto; max-height : 10vh ">{{task.DueDate}}</div>
+                  <div class="card-footer">
+                    {{task.state}}
+                  </div>
+                </div>
+                {%endfor%}
+                {% else %}
+                <h3 class="d-flex justify-content-center">Nu exista nici un task </h3>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+{%endblock%}

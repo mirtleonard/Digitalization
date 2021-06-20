@@ -1,36 +1,41 @@
-{%extends "base.html" %}
-{%load crispy_forms_tags%}
-{%block title%}Caută rapoarte{%endblock%}
-{%block content%}
-<div class = "row" style="margin-top:10VH; margin-left:20%; margin-right:20%">
-  <form class="d-flex col-md-6 justify-content-center" action="{% url 'searchEventReports' %}" method="get">
-    <div>
-      <div class="d-flex justify-content-center">
-        <button type="submit" class="d-inline my-2 btn btn-info">Search</button>
-        <!-- IDEA:  <i class="fas fa-search d-inline" style="font-size:33px"></i> -->
-      </div>
-      {{ reports.form|crispy}}
-    </div>
-  </form>
-  <div class="col-md-6 container d-flex justify-content-center" style="min-height: 30VH;" id="result">
-    <div style=" width:500PX">
-      <h4 style="text-align: center"> Rezultate:</h4>
-      <div class="d-flex flex-column" style="overflow-x : auto; max-height: 60VH; margin-top:10VH; margin-bottom:10VH">
-        {% if reports.qs %}
-        {% for report in reports.qs%}
-        <div class="card m-2">
-          <div class="card-header"><a href= "{%url 'viewEventReport' report.id%}">{{report.title}}</a></div>
-          <div data-offset="50" class="card-body" style="overflow-x : auto; max-height : 10vh ">{{report.center}}</div>
-          <div class="card-footer">
-            {{report.beginingDate}}
-          </div>
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block title %}Caută rapoarte{% endblock %}
+{% block content %}
+<div class="d-flex flex-wrap m-2">
+
+  <div class="container card d-flex justify-content-center" style="margin-top:10VH; width:400px; height=400PX;">
+    <form  action="{% url 'searchEventReports' %}" method="get">
+      <div class="card-body">
+        <h4 class="card-title">Caută după criteriu:</h4>
+        {{reports.form|crispy}}
+        <div class="d-flex justify-content-center">
+          <button type="submit" class="d-inline my-2 btn btn-info">Search</button>
         </div>
-        {%endfor%}
+      </div>
+    </form>
+  </div>
+
+  <div class="container d-flex justify-content-center" style="min-height: 30VH;" id="result">
+    <div style=" width:400px; margin-top:10VH">
+      <h4 style="text-align: center"> Rezultate:</h4>
+      <div class="d-flex flex-column" style="overflow-x:auto; max-height:50VH; margin-top:10VH;">
+        {% if reports.qs %}
+          {% for report in reports.qs %}
+            <div class="card">
+              <div class="card-header"><a href= "{%url 'viewEventReport' report.id%}">{{report.title}}</a></div>
+              <div data-offset="50" class="card-body" style="overflow-x:auto; max-height:10vh">{{report.center}}</div>
+              <div class="card-footer">
+                {{report.beginingDate}}
+              </div>
+            </div>
+          {% endfor %}
         {% else %}
-        <h3 class="d-flex justify-content-center" style="margin-top: 10VH; margin-bottom: 20VH">Nu exista nici un raport </h3>
+          <h3 class="d-flex justify-content-center" style="margin-top: 10VH; margin-bottom: 20VH">Nu există nici un raport </h3>
         {% endif %}
       </div>
     </div>
   </div>
+
 </div>
-{%endblock%}
+{% endblock %}

@@ -157,5 +157,15 @@ MESSAGE_TAGS = {
 
 #media
 import os
-MEDIA_URL = "media/"
+MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, 'activityReport/')
+
+#email
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_PORT = '1025'
+EMAIL_HOST = 'localhost'
+#EMAIL_USE_TLS
+#EMAIL_USE_SSL
+#EMAIL_TIMEOUT
+#EMAIL_SSL_KEYFILE
+#EMAIL_SSL_CERTFILE

@@ -4,6 +4,7 @@ from crispy_forms.layout import Submit
 from eventReport.models import EventReport
 
 class EventReportForm(ModelForm):
+    photos = FileField(required=False, widget=FileInput(attrs = {'multiple' : True}), label="Imagini")
     username = CharField(widget=HiddenInput())
     class Meta:
         model = EventReport
