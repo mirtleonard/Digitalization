@@ -23,8 +23,10 @@
       <p><b> Puncte slabe:</b> <br>{{report.weaknesses|linebreaks}}</p>
       <p><b> Îmbunătățiri:</b> <br>{{report.improvements|linebreaks}}</p>
       <p><b> Raport realizat de:</b> {{report.username|linebreaks}}</p>
-      {% if report.photo %}
-        <img src="{{report.photo.url}}" alt="" class="img-fluid">
+      {% if photos %}
+        {% for photo in photos %}
+          <img src="{{path}}{{photo}}" alt="" class="img-fluid">
+        {% endfor %}
       {% endif %}
     </div>
     <div class="card-footer">

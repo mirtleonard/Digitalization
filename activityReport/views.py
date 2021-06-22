@@ -1,24 +1,48 @@
+from django.contrib.staticfiles.storage import StaticFilesStorage
+from django.core.files.storage import default_storage as storage
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from activityReport.filters import ActivityReportFilter
 from django.shortcuts import render, get_object_or_404
+from django.contrib.staticfiles.utils import get_files
 from activityReport.forms import ActivityReportForm
 from activityReport.models import ActivityReport
+from django.core.files.base import ContentFile
 from django.contrib import messages
+from django.conf import settings
 from django.urls import reverse
+import os
 
 # Create your views here.
+
+def save_photos(photos, id):
+    storage_path = os.path.join(settings.MEDIA_ROOT, 'activityReport/' + str(id) + '/img.png')
+    for photo in photos:
+        storage.save(storage_path, photo)
+
 @login_required
 def viewActivityReport(request, report_id):
     report = get_object_or_404(ActivityReport, pk=report_id)
-    return render(request, 'viewActivityReport.html', {'report' : report})
+    try:
+        photos = os.listdir(os.path.join(settings.MEDIA_ROOT, 'activityReport/' + str(report_id)))
+    except OSError as e:
+        photos = ''
+    path = settings.MEDIA_URL + 'activityReport/' + str(report_id) + '/'
+    context = {
+        'report' : report,
+        'photos' : photos,
+        'path' : path
+    }
+    return render(request, 'viewActivityReport.html', context)
 
 @login_required
 def createActivityReport(request):
     if request.method == 'POST':
         form = ActivityReportForm(request.POST, request.FILES or None)
+        photos = request.FILES.getlist('photos')
         if form.is_valid():
-            form.save()
+            report = form.save()
+            save_photos(photos, report.id)
             messages.success(request, "Raportul a fost creat!")
             user = request.user
             user.activityReports += 1
@@ -30,7 +54,6 @@ def createActivityReport(request):
         form = ActivityReportForm(initial = {'username' : request.user.get_username()})
     context = {
         'report' : form,
-        'path' : 'createActivityReport',
     }
     return render(request, 'editActivityReport.html', context)
 
@@ -38,7 +61,9 @@ def createActivityReport(request):
 def updateActivityReport(request, report_id):
     if request.method == 'POST':
         form = ActivityReportForm(request.POST, request.FILES or None)
+        photos = request.FILES.getlist('photos')
         if form.is_valid():
+            save_photos(photos, report_id)
             messages.success(request, "Raportul a fost editat!")
             report = form.save(commit=False)
             report.id = report_id
@@ -54,7 +79,6 @@ def updateActivityReport(request, report_id):
             return viewActivityReport(request, report_id)
     context = {
         'report' : form,
-        'path' : str(report_id),
     }
     return render(request, 'editActivityReport.html', context)
 

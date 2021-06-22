@@ -10,4 +10,4 @@ urlpatterns = [
     path('activityReport/<int:report_id>', views.viewActivityReport, name= 'viewActivityReport'),
     path('createActivityReport', views.createActivityReport, name = 'createActivityReport'),
 ]
-#urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
