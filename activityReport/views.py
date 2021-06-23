@@ -1,4 +1,3 @@
-from django.contrib.staticfiles.storage import StaticFilesStorage
 from django.core.files.storage import default_storage as storage
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
@@ -31,7 +30,7 @@ def viewActivityReport(request, report_id):
     context = {
         'report' : report,
         'photos' : photos,
-        'path' : path
+        'path' : path,
     }
     return render(request, 'viewActivityReport.html', context)
 

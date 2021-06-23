@@ -10,18 +10,18 @@
     </div>
     <div class="card-body">
       <h3 class="text-center">{{report.title}}</h3>
-      <p><b>Ramura de vârstă:</b>{{report.branch}}</p><br>
-      <p><b>Aria de dezvoltare:</b>{{report.areas}}</p><br>
-      <p><b>Loc de desfășurare:  </b>{{report.location}}</p><br>
-      <p><b>Data:  </b>{{report.date}}</p><br>
-      <p><b>Durata:</b>{{report.duration}}</p><br>
+      <p><b>Ramura de vârstă: </b>{{report.branch}}</p><br>
+      <p><b>Aria de dezvoltare: </b>{{report.areas}}</p><br>
+      <p><b>Loc de desfășurare: </b>{{report.location}}</p><br>
+      <p><b>Data: </b>{{report.date}}</p><br>
+      <p><b>Durata: </b>{{report.duration}}</p><br>
       <p><b>Număr de participanți: </b>{{report.participants}}</p> <br>
       <p><b>Materiale necesare: </b>{{report.materials|linebreaks}} </p> <br>
       <p><b>Obiectivele activității: </b>{{report.goals|linebreaks}} </p> <br>
       <p><b> Descrierea activității:</b><br>{{report.description|linebreaks}}</p><br>
-      <p><b> Puncte tari:</b> <br>{{report.strengths|linebreaks}}</p>
-      <p><b> Puncte slabe:</b> <br>{{report.weaknesses|linebreaks}}</p>
-      <p><b> Îmbunătățiri:</b> <br>{{report.improvements|linebreaks}}</p>
+      <p><b> Puncte tari: </b><br>{{report.strengths|linebreaks}}</p>
+      <p><b> Puncte slabe: </b><br>{{report.weaknesses|linebreaks}}</p>
+      <p><b> Îmbunătățiri: </b><br>{{report.improvements|linebreaks}}</p>
       <p><b> Raport realizat de:</b> {{report.username|linebreaks}}</p>
       {% if photos %}
         {% for photo in photos %}

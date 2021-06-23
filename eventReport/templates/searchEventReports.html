@@ -22,7 +22,7 @@
       <div class="d-flex flex-column" style="overflow-x:auto; max-height:50VH; margin-top:10VH;">
         {% if reports.qs %}
           {% for report in reports.qs %}
-            <div class="card">
+            <div class="card m-2">
               <div class="card-header"><a href= "{%url 'viewEventReport' report.id%}">{{report.title}}</a></div>
               <div data-offset="50" class="card-body" style="overflow-x:auto; max-height:10vh">{{report.center}}</div>
               <div class="card-footer">

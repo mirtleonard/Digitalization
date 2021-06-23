@@ -1,3 +1,4 @@
+from django.core.files.storage import default_storage as storage
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404
@@ -5,21 +6,39 @@ from eventReport.filters import EventReportFilter
 from eventReport.forms import EventReportForm
 from eventReport.models import EventReport
 from django.contrib import messages
+from django.conf import settings
 from django.urls import reverse
-from django.db.models import Q
+import os
 
 # Create your views here.
+def save_photos(photos, id):
+    storage_path = os.path.join(settings.MEDIA_ROOT, 'eventReport/' + str(id) + '/img.png')
+    for photo in photos:
+        storage.save(storage_path, photo)
+
 @login_required
 def viewEventReport(request, report_id):
     report = get_object_or_404(EventReport, pk=report_id)
-    return render(request, 'viewEventReport.html', {'report' : report})
+    try:
+        photos = os.listdir(os.path.join(settings.MEDIA_ROOT, 'eventReport/' + str(report_id)))
+    except OSError as e:
+        photos = ''
+    path = settings.MEDIA_URL + 'eventReport/' + str(report_id) + '/'
+    context = {
+        'report' : report,
+        'photos' : photos,
+        'path' : path,
+    }
+    return render(request, 'viewEventReport.html', context)
 
 @login_required
 def createEventReport(request):
     if request.method == 'POST':
-        form = EventReportForm(request.POST)
+        form = EventReportForm(request.POST, request.FILES or None)
+        photos = request.FILES.getlist('photos')
         if form.is_valid():
-            form.save()
+            report = form.save()
+            save_photos(photos, report.id)
             messages.success(request, "Raportul a fost creat!")
             user = request.user
             user.eventReports += 1
@@ -31,7 +50,6 @@ def createEventReport(request):
         form = EventReportForm(initial = {'username' : request.user.get_username()})
     context = {
         'form' : form,
-        'path' : '',
     }
     return render(request, 'editEventReport.html', context)
 
@@ -39,7 +57,9 @@ def createEventReport(request):
 def updateEventReport(request, report_id):
     if request.method == 'POST':
         form = EventReportForm(request.POST)
+        photos = request.FILES.getlist('photos')
         if form.is_valid():
+            save_photos(photos, report_id)
             messages.success(request, "Raportul a fost editat!")
             report = form.save(commit=False)
             report.id = report_id
@@ -55,7 +75,6 @@ def updateEventReport(request, report_id):
             return viewEventReport(request, report_id)
     context = {
         'form' : form,
-        'path' : str(report_id),
     }
     return render(request, 'editEventReport.html', context)
 

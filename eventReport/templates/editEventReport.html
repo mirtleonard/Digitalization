@@ -10,7 +10,7 @@
       <img  class="d-inline float-right" src="{% static 'img/logo.png' %}" alt="logo" id='centru' style="width: 60px; height: 60px;">
     </div>
     <div class="card-body">
-      <form  id='report' action="{{path}}" method="post">
+      <form  id='report' action="" enctype="multipart/form-data" method="post">
         {% csrf_token %}
         {{form|crispy}}
       </form>
