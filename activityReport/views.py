@@ -10,22 +10,23 @@ from django.core.files.base import ContentFile
 from django.contrib import messages
 from django.conf import settings
 from django.urls import reverse
-import os
+import os, shutil
 
 # Create your views here.
 
-def save_photos(photos, id):
+def savePhotos(photos, id):
     storage_path = os.path.join(settings.MEDIA_ROOT, 'activityReport/' + str(id) + '/img.png')
     for photo in photos:
         storage.save(storage_path, photo)
 
 @login_required
 def viewActivityReport(request, report_id):
-    report = get_object_or_404(ActivityReport, pk=report_id)
+    photos = ''
     try:
         photos = os.listdir(os.path.join(settings.MEDIA_ROOT, 'activityReport/' + str(report_id)))
     except OSError as e:
         photos = ''
+    report = get_object_or_404(ActivityReport, pk=report_id)
     path = settings.MEDIA_URL + 'activityReport/' + str(report_id) + '/'
     context = {
         'report' : report,
@@ -41,7 +42,7 @@ def createActivityReport(request):
         photos = request.FILES.getlist('photos')
         if form.is_valid():
             report = form.save()
-            save_photos(photos, report.id)
+            savePhotos(photos, report.id)
             messages.success(request, "Raportul a fost creat!")
             user = request.user
             user.activityReports += 1
@@ -62,7 +63,7 @@ def updateActivityReport(request, report_id):
         form = ActivityReportForm(request.POST, request.FILES or None)
         photos = request.FILES.getlist('photos')
         if form.is_valid():
-            save_photos(photos, report_id)
+            savePhotos(photos, report_id)
             messages.success(request, "Raportul a fost editat!")
             report = form.save(commit=False)
             report.id = report_id
@@ -91,6 +92,10 @@ def deleteActivityReport(request, report_id):
         user = request.user
         user.activityReports -= 1
         user.save()
+        try:
+            shutil.rmtree(settings.MEDIA_ROOT + '/activityReport/' + str(report_id))
+        except OSError as e:
+            pass
         ActivityReport.objects.filter(id = report_id).delete()
         messages.success(request, "Raportul a fost șters!")
         return HttpResponseRedirect(reverse('profile'))

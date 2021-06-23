@@ -8,7 +8,7 @@ from eventReport.models import EventReport
 from django.contrib import messages
 from django.conf import settings
 from django.urls import reverse
-import os
+import os, shutil
 
 # Create your views here.
 def save_photos(photos, id):
@@ -88,6 +88,10 @@ def deleteEventReport(request, report_id):
         user = request.user
         user.eventReports -= 1
         user.save()
+        try:
+            shutil.rmtree(settings.MEDIA_ROOT + '/eventReport/' + str(report_id))
+        except OSError as e:
+            pass
         EventReport.objects.filter(id = report_id).delete()
         messages.success(request, "Raportul a fost șters!")
         return HttpResponseRedirect(reverse('profile'))
