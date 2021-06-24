@@ -6,5 +6,6 @@ urlpatterns = [
     path('deleteEventReport/<int:report_id>', views.deleteEventReport, name = 'deleteEventReport'),
     path('eventReport/<int:report_id>', views.viewEventReport, name= 'viewEventReport'),
     path('searchEventReports', views.searchEventReports, name = 'searchEventReports'),
+    path('eventReport/<int:report_id>/download', views.download, name = 'download'),
     path('createEventReport', views.createEventReport, name = 'createEventReport'),
 ]

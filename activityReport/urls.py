@@ -9,4 +9,5 @@ urlpatterns = [
     path('searchActivityReports/<str:branch>', views.searchActivityReports, name = 'searchActivityReports'),
     path('activityReport/<int:report_id>', views.viewActivityReport, name= 'viewActivityReport'),
     path('createActivityReport', views.createActivityReport, name = 'createActivityReport'),
+    path('activityReport/<int:report_id>/download', views.download, name = 'download'),
 ]

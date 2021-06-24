@@ -8,7 +8,8 @@ from eventReport.models import EventReport
 from django.contrib import messages
 from django.conf import settings
 from django.urls import reverse
-import os, shutil
+import os, shutil, zipfile
+from io import BytesIO
 
 # Create your views here.
 def save_photos(photos, id):
@@ -103,3 +104,23 @@ def searchEventReports(request):
         'reports':reports,
     }
     return render(request, 'searchEventReports.html', context)
+
+@login_required
+def download(request, report_id):
+    path = os.path.join(settings.MEDIA_ROOT, 'eventReport/' + str(report_id))
+    photos = os.listdir(path)
+    zip_files = "%s.zip" % "img"
+
+    bytesIO = BytesIO()
+
+    zip = zipfile.ZipFile(bytesIO, 'w')
+
+    for photo in photos:
+        fpath = path + '/' + photo
+        print(fpath)
+        zip.write(fpath, photo)
+
+    zip.close()
+    response = HttpResponse(bytesIO.getvalue(), content_type="aplication/x-zip-compressed")
+    response['Content-Disposition'] = 'attachement; filename=img.zip'
+    return response

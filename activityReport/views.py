@@ -10,7 +10,8 @@ from django.core.files.base import ContentFile
 from django.contrib import messages
 from django.conf import settings
 from django.urls import reverse
-import os, shutil
+import os, shutil, zipfile
+from io import BytesIO
 
 # Create your views here.
 
@@ -108,3 +109,23 @@ def searchActivityReports(request, branch):
         'branch' : branch,
     }
     return render(request, 'searchActivityReports.html', context)
+
+@login_required
+def download(request, report_id):
+    path = os.path.join(settings.MEDIA_ROOT, 'activityReport/' + str(report_id))
+    photos = os.listdir(path)
+    zip_files = "%s.zip" % "img"
+
+    bytesIO = BytesIO()
+
+    zip = zipfile.ZipFile(bytesIO, 'w')
+
+    for photo in photos:
+        fpath = path + '/' + photo
+        print(fpath)
+        zip.write(fpath, photo)
+
+    zip.close()
+    response = HttpResponse(bytesIO.getvalue(), content_type="aplication/x-zip-compressed")
+    response['Content-Disposition'] = 'attachement; filename=img.zip'
+    return response
