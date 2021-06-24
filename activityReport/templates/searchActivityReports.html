@@ -9,7 +9,7 @@
       <form action='{% url 'searchActivityReports' branch %}' method="get">
         {{reports.form|crispy}}
         <div class="d-flex justify-content-center">
-          <button type="submit" class="btn btn-info">Search</button>
+          <button type="submit" class="btn my-2 btn-info">Search</button>
         </div>
       </form>
     </div>
@@ -17,17 +17,15 @@
   <div class="container d-flex justify-content-center"  id="result">
     <div style="width:400PX; margin-top:10VH;">
       <h4 style="text-align: center;"> Rezultate:</h4>
-      <div class="d-flex flex-column" style="overflow-x:auto; max-height:50VH;">
+      <div class="d-flex flex-column" style="overflow-x:auto; max-height:50VH; margin-top:10VH;">
         {% if reports.qs %}
           {% for report in reports.qs %}
             <div class="card m-2">
               <div class="card-header">
                 <a href='{% url 'viewActivityReport' report.id %}'>{{report.title}}</a>
               </div>
-              <div data-offset="50" class="card-body" style="overflow-x:auto; max-height:10vh">{{report.branch}}</div>
-              <div class="card-footer">
-                {{report.date}}
-              </div>
+              <div data-offset="50" class="card-body" style="overflow-x:auto; max-height:10vh">{{report.branch}}<br>{{report.date}}</div>
+
             </div>
           {% endfor %}
         {% else %}

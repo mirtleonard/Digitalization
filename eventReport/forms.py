@@ -11,7 +11,8 @@ class EventReportForm(ModelForm):
         fields = '__all__'
         widgets = {
             'endDate' : DateTimeInput(attrs = {'type' : 'datetime-local',}),
-
+            'center' : TextInput(attrs = {'placeholder' : 'Centrul local AMD Pildești',}),
+            'eventType' : TextInput(attrs = {'placeholder' : 'Local, Regional, Național, Internațional'}),
             'beginingDate' : DateTimeInput(attrs = {'type' : 'datetime-local',})
         }
         labels = {

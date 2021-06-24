@@ -4,7 +4,7 @@
 {% block content %}
 <div class="d-flex flex-wrap m-2">
 
-  <div class="container card d-flex justify-content-center" style="margin-top:10VH; width:400px; height=400PX;">
+  <div class="container card d-flex justify-content-center" style="margin-top:10VH; width:400px; height=500px;">
     <form  action="{% url 'searchEventReports' %}" method="get">
       <div class="card-body">
         <h4 class="card-title">Caută după criteriu:</h4>
@@ -16,8 +16,8 @@
     </form>
   </div>
 
-  <div class="container d-flex justify-content-center" style="min-height: 30VH;" id="result">
-    <div style=" width:400px; margin-top:10VH">
+  <div class="container d-flex justify-content-center"  id="result">
+    <div style=" width:400px; margin-top:10VH;">
       <h4 style="text-align: center"> Rezultate:</h4>
       <div class="d-flex flex-column" style="overflow-x:auto; max-height:50VH; margin-top:10VH;">
         {% if reports.qs %}
@@ -25,13 +25,10 @@
             <div class="card m-2">
               <div class="card-header"><a href= "{%url 'viewEventReport' report.id%}">{{report.title}}</a></div>
               <div data-offset="50" class="card-body" style="overflow-x:auto; max-height:10vh">{{report.center}}</div>
-              <div class="card-footer">
-                {{report.beginingDate}}
-              </div>
             </div>
           {% endfor %}
         {% else %}
-          <h3 class="d-flex justify-content-center" style="margin-top: 10VH; margin-bottom: 20VH">Nu există nici un raport </h3>
+          <h3 class="d-flex justify-content-center" style="margin-top: 10VH; margin-bottom:25VH">Nu există nici un raport </h3>
         {% endif %}
       </div>
     </div>

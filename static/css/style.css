@@ -1,3 +1,4 @@
+
 .dropdown-menu a:hover{
   background-color:  #5bc0de;
 }
@@ -67,6 +68,7 @@
   border: none;
 }
 .profile-head .nav-tabs .nav-link.active{
+  background-color: #f7f7f7;
   border: none;
   border-bottom:2px solid #0062cc;
 }
