@@ -4,9 +4,9 @@
 {% load static %}
 <div class="containter d-flex justify-content-center m-3">
   <div class="card my-5" style="width:600px">
-    <div class="card-header">
-      <img  class="d-inline float-left" src="{% static 'img/scout.png' %}" alt="logo" id='scout' style="width: 150px; height: 60px;">
-      <img  class="d-inline float-right" src="{% static 'img/logo.png' %}" alt="logo" id='scout' style="width: 60px; height: 60px;">
+    <div class="card-header ">
+      <img  class="d-inline float-left" src="{% static 'img/scout.png' %}" alt="logo" id='scout' style="width: 200px; height: 70px;">
+      <img  class="d-inline float-right" src="{% static 'img/logo.png' %}" alt="logo" id='scout' style="width: 70px; height: 70px;">
     </div>
     <div class="card-body">
       <h3 class="text-center">{{report.title}}</h3>
@@ -48,7 +48,7 @@
 
 
     </div>
-    <div class="card-footer">
+    <div class="card-footer bg-white">
       <form action="{% url 'updateActivityReport' report.id %}" id="update" method="get"></form>
       <form action="{% url 'deleteActivityReport' report.id %}" id="delete" method="post">{% csrf_token %}</form>
       <button class="btn btn-info d-inline" type="submit" form="update">Editează</button>

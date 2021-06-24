@@ -4,15 +4,15 @@
 {%load crispy_forms_tags%}
 {%block content%}
   <div class="d-flex justify-content-center my-5" >
-    <div class="card" style="margin-top: 5VH; width:500px">
-      <h2 class="card-header"> Înregistrare: </h2>
+    <div class="card" style="margin-top: 5VH; width:400px">
+      <h2 class="bg-white card-header text-center"> Înregistrare: </h2>
       <form  action="{% url 'register' %}" method="post" id="register" >
         {% csrf_token %}
         <div class="card-body">
           {{form|crispy}}
         </div>
       </form>
-        <div class="d-flex justify-content-center card-footer">
+        <div class="bg-white d-flex justify-content-center card-footer">
           <button type="submit" form="register" class="btn btn-info">Register</button>
         </div>
     </div>

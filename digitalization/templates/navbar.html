@@ -1,55 +1,54 @@
-<nav class=" bg-dark navbar navbar-expand-sm navbar-dark">
-  <ul class="navbar-nav d-flex" style="font-size: 23px">
-    <li clas="nav-item">
+<nav class="bg-dark navbar navbar-expand-sm navbar-dark">
+  <ul class="navbar-nav" style="font-size: 23px">
+    <div class="d-flex float-left col-lg-2">
       {%load static%}
-      <img src="{% static 'img/logo.png'%}" alt="logo" style="width:50px; height:50px">
-    </li>
-    <li class="nav-item">
+      <img src="{% static 'img/logo.png'%}" alt="logo" style="width:70px; height:70px">
+    </div>
+    <li class="nav-item col-lg-4 my-2">
       <a href="{%url 'profile'%}" class="nav-link">
         <i class="fa fw fa-user">
         </i>
         Profil
       </a>
-    <li class="nav-item ">
-      <div class="dropdown">
-        <div class=nav-link dropdown-toggle" data-toggle="dropdown">
-          <i class="fa fa-align-center">
-          </i>
-          Vezi rapoarte
+      <li class="nav-item  col-lg-4 my-2">
+        <div class="dropdown">
+          <div class=nav-link dropdown-toggle" data-toggle="dropdown">
+            <i class="fa fa-align-center">
+            </i>
+            Vezi rapoarte
+          </div>
+          <div class="dropdown-menu bg-dark">
+            <a class="dropdown-item text-white" href="{%url 'searchActivityReports' 'Lupisori'%}">Lupișori</a>
+            <a class="dropdown-item text-white" href="{%url 'searchActivityReports' 'Temerari'%}">Temerari</a>
+            <a class="dropdown-item text-white" href="{%url 'searchActivityReports' 'Exploratori'%}">Exploratori</a>
+            <a class="dropdown-item text-white" href="{%url 'searchEventReports'%}">Evenimente</a>
+          </div>
         </div>
-        <div class="dropdown-menu bg-dark">
-          <a class="dropdown-item text-white" href="{%url 'searchActivityReports' 'Lupisori'%}">Lupișori</a>
-          <a class="dropdown-item text-white" href="{%url 'searchActivityReports' 'Temerari'%}">Temerari</a>
-          <a class="dropdown-item text-white" href="{%url 'searchActivityReports' 'Exploratori'%}">Exploratori</a>
-          <a class="dropdown-item text-white" href="{%url 'searchEventReports'%}">Evenimente</a>
+      </li>
+      <li class="nav-item col-lg-4 my-2">
+        <div class="dropdown">
+          <div class=nav-link dropdown-toggle" data-toggle="dropdown">
+            <i class="fa fa-align-center">
+            </i>
+            Adaugă raport
+          </div>
+          <div class="dropdown-menu bg-dark">
+            <a class="dropdown-item text-white" href="{%url 'createActivityReport'%}">Activitate</a>
+            <a class="dropdown-item text-white" href="{%url 'createEventReport'%}">Eveniment</a>
+          </div>
         </div>
-      </div>
-    </li>
-    <li class="nav-item">
-      <div class="dropdown">
-        <div class=nav-link dropdown-toggle" data-toggle="dropdown">
-          <i class="fa fa-align-center">
-          </i>
-          Adaugă raport
-        </div>
-        <div class="dropdown-menu bg-dark">
-          <a class="dropdown-item text-white" href="{%url 'createActivityReport'%}">Activitate</a>
-          <a class="dropdown-item text-white" href="{%url 'createEventReport'%}">Eveniment</a>
-        </div>
-      </div>
-
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="{%url 'createTask' %}">
-        <i class="fas fa-tasks"></i>
-        Adaugă task
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link " href="{%url 'logout_user'%}">
-        <i class="fa fa-sign-out-alt"></i>
-        Logout
-      </a>
-    </li>
-  </ul>
-</nav>
+      </li>
+      <li class="nav-item col-lg-4 my-2">
+        <a class="nav-link" href="{%url 'createTask' %}">
+          <i class="fas fa-tasks"></i>
+          Adaugă task
+        </a>
+      </li>
+      <li class="nav-item col-lg-4 my-2">
+        <a class="nav-link " href="{%url 'logout_user'%}">
+          <i class="fa fa-sign-out-alt"></i>
+          Logout
+        </a>
+      </li>
+    </ul>
+  </nav>

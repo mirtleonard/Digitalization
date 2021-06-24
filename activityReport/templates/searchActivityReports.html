@@ -21,7 +21,7 @@
         {% if reports.qs %}
           {% for report in reports.qs %}
             <div class="card m-2">
-              <div class="card-header">
+              <div class="card-header bg-white">
                 <a href='{% url 'viewActivityReport' report.id %}'>{{report.title}}</a>
               </div>
               <div data-offset="50" class="card-body" style="overflow-x:auto; max-height:10vh">{{report.branch}}<br>{{report.date}}</div>

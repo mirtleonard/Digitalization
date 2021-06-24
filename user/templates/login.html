@@ -3,8 +3,8 @@
 {%block navbar%}{%endblock%}
 {%block content%}
 <div class="container d-flex justify-content-center">
-  <div class="card" style="margin-top:20VH; width:70%">
-    <h5 class="card-header bg">Autentificare</h5>
+  <div class="card" style="margin-top:20VH; width:400px">
+    <h5 class="card-header bg-white text-center">Autentificare</h5>
     <div class="card-body">
       <form action="{% url 'login_user' %}" id="login" method="POST">
         {% csrf_token %}
@@ -20,9 +20,9 @@
       <form id="register" action="{% url 'register' %}" method="GET">
       </form>
     </div>
-    <div class="card-footer">
-      <button type="submit" form="login" class="btn btn-info d-inline">Login</button>
-      <button type="submit" form="register" class="btn btn-info d-inline float-right">Register</button>
+    <div class="card-footer bg-white">
+      <button type="submit" form="login" class="btn btn-info d-inline float-right">Login</button>
+      <button type="submit" form="register" class="btn btn-info d-inline">Register</button>
     </div>
   </div>
 </div>

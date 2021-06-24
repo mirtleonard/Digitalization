@@ -8,3 +8,8 @@ class TaskForm(ModelForm):
         widgets = {
             'dueDate' : DateInput(attrs={'type' : 'date'})
         }
+        labels = {
+            'dueDate' : 'Data limită:',
+            'title' : 'Task:',
+            'user' : 'Lider:',
+        }
