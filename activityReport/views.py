@@ -88,7 +88,7 @@ def deleteActivityReport(request, report_id):
     report = get_object_or_404(ActivityReport, pk = report_id)
     if report.username != request.user.get_username():
         messages.error(request, "Doar creatorul poate șterge formularul")
-        return viewReport(request, report_id)
+        return viewActivityReport(request, report_id)
     else:
         user = request.user
         user.activityReports -= 1

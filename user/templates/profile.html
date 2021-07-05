@@ -68,12 +68,12 @@
             <div style=" width:350PX">
               <div class="d-flex flex-column" style="overflow-x : auto; max-height : 20VH">
                 {% if ActivityReports %}
-                  {% for report in ActivityReports%}
+                  {% for report in ActivityReports %}
                     <div class="card m-2">
                       <div class="card-header d-flex justify-content-center"><a href= "{% url 'viewActivityReport' report.id %}">{{report.title}}</a></div>
-                      <div data-offset="50" class="card-body" style="overflow-x : auto; max-height : 10vh ">{{report.branch}}<br>{{report.date}}</div>
+                      <div data-offset="50" class="card-body" style="overflow-x : auto; max-height : 10vh ">{{report.areas}}<br>{{report.date}}</div>
                     </div>
-                    {%endfor%}
+                    {% endfor %}
                 {% else %}
                 <h3 class="d-flex justify-content-center">Nu exista nici un raport </h3>
                 {% endif %}
@@ -88,12 +88,12 @@
             <div style=" width:350PX">
               <div class="d-flex flex-column" style="overflow-x : auto; max-height : 20VH">
                 {% if EventReports %}
-                  {% for report in EventReports%}
+                  {% for report in EventReports %}
                     <div class="card m-2">
-                      <div class="card-header bg-white"><a href= "{% url 'viewEventReport' report.id %}" >{{report.title}}</a></div>
-                      <div data-offset="50" class="card-body" style="overflow-x : auto; max-height : 10vh ">{{report.center}}</div>
+                      <div class="card-header d-flex justify-content-center"><a href= "{% url 'viewEventReport' report.id %}" >{{report.title}}</a></div>
+                      <div data-offset="50" class="card-body" style="overflow-x : auto; max-height : 10vh ">{{report.location}} <br> {{report.beginingDate}}</div>
                     </div>
-                  {%endfor%}
+                  {% endfor %}
                 {% else %}
                 <h3 class="d-flex justify-content-center">Nu exista nici un raport </h3>
                 {% endif %}
@@ -108,9 +108,9 @@
             <div style=" width:350PX">
               <div class="d-flex flex-column" style="overflow-x : auto; max-height : 20VH">
                 {% if Tasks %}
-                  {% for task in Tasks%}
+                  {% for task in Tasks %}
                     <div class="card m-2">
-                      <div data-offset="50" class="card-header bg-white">
+                      <div data-offset="50" class="card-header">
                         <div class="d-flex justify-content-center"><a href= "{{task.id}}" >{{task.title}}</a></div>
                       </div>
                       <div class="card-body">
@@ -126,7 +126,7 @@
                         </div>
                       </div>
                     </div>
-                  {%endfor%}
+                  {% endfor %}
                 {% else %}
                   <h3 class="d-flex justify-content-center">Nu exista nici un task </h3>
                 {% endif %}

@@ -31,6 +31,7 @@ def register(request):
             )
             user.set_password(form.cleaned_data.get('password'))
             user.save()
+            messages.success(request, "Utilizatorul a fost creat.")
             return index(request)
     else:
         form = registerForm()
@@ -43,6 +44,7 @@ def login_user(request):
     if user is not None:
         login(request, user)
         return HttpResponseRedirect(reverse('profile'))
+    messages.error(request, "Nu există utilizator cu acest nume sau parolă!")
     return HttpResponseRedirect(reverse('index'))
 
 def logout_user(request):

@@ -51,7 +51,7 @@
     <div class="card-footer bg-white">
       <form action="{% url 'updateActivityReport' report.id %}" id="update" method="get"></form>
       <form action="{% url 'deleteActivityReport' report.id %}" id="delete" method="post">{% csrf_token %}</form>
-      <button class="btn btn-info d-inline" type="submit" form="update">Editează</button>
+      <button class="btn btn-info d-inline mb-3" type="submit" form="update">Editează</button>
       <button type="button" class="btn btn-info float-right" data-toggle="modal" data-target="#validate">Șterge</button>
     </div>
   </div>

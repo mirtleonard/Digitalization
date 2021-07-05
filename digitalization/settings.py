@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.postgres',
     'django_filters',
+    'rest_framework',
     'crispy_forms',
     'activityReport',
     'eventReport',
@@ -169,3 +170,14 @@ EMAIL_HOST = 'localhost'
 #EMAIL_TIMEOUT
 #EMAIL_SSL_KEYFILE
 #EMAIL_SSL_CERTFILE
+
+#api
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ],
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10,
+}

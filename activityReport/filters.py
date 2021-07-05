@@ -4,9 +4,16 @@ from django.db import models
 from activityReport.models import ActivityReport
 
 class ActivityReportFilter(django_filters.FilterSet):
+    areas = django_filters.CharFilter(widget = Select(choices = (
+                ('intelectuala', 'intelectuala'),
+                ('spirituala', 'spirituala'),
+                ('caracter', 'caracter'),
+                ('afectiva', 'afectiva'),
+                ('sociala', 'sociala'),
+                ('fizica', 'fizica'))))
     class Meta:
         model = ActivityReport
-        fields = ['title', 'areas', 'username', 'location']
+        fields = ['title', 'username', 'location']
         filter_overrides = {
             models.CharField: {
                 'filter_class' : django_filters.CharFilter,
@@ -14,6 +21,15 @@ class ActivityReportFilter(django_filters.FilterSet):
                     'lookup_expr': 'unaccent__icontains',
                 }
             }
+        }
+        widgets = {
+            'areas' : Select(choices = (
+                ('intelectuala', 'intelectuala'),
+                ('spirituala', 'spirituala'),
+                ('caracter', 'caracter'),
+                ('afectiva', 'afectiva'),
+                ('sociala', 'sociala'),
+                ('fizica', 'fizica'))),
         }
     def __init__(self, request, branch, *args, **kwargs):
         super().__init__(request, *args, **kwargs)

@@ -5,7 +5,8 @@ class registerForm(ModelForm):
     confirm_password = CharField(widget=PasswordInput(), required=True, label=('Repeta parola'))
     password = CharField(widget=PasswordInput(), required=True, label=('Parola'))
     birth = DateField(widget=DateInput(attrs = {'type' : 'date'}))
-    username = CharField(required=True, label=('Nume'))
+    username = CharField(required=True, label=('Nume'), error_messages={'unique':'Există deja utilizatorul cu numele introdus.'})
+    email = EmailField(required=True, error_messages={'unique' : 'Există deja utilizator cu acest email.'})
     class Meta:
         model = User
         fields = ['username', 'email', 'branch','birth', 'password']
