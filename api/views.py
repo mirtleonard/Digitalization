@@ -1,11 +1,7 @@
-from rest_framework import serializers, viewsets
+from api.serializers import UserSerializer
 from django.shortcuts import render
+from rest_framework import viewsets
 from user.models import User
-
-class UserSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = User
-        fields = ['username', 'password']
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
