@@ -12,8 +12,11 @@
           {{form|crispy}}
         </div>
       </form>
-        <div class="bg-white d-flex justify-content-center card-footer">
-          <button type="submit" form="register" class="btn btn-info">Register</button>
+      <form id="login" action="{% url 'index' %}" method="GET">
+      </form>
+        <div class="bg-white card-footer">
+          <button type="submit" form="login" class="btn btn-info d-inine float-left">Login</button>
+          <button type="submit" form="register" class="btn btn-info float-right d-inline">Register</button>
         </div>
     </div>
   </div>

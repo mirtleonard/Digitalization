@@ -24,7 +24,7 @@ urlpatterns = [
     path('', include('task.urls')),
     path('', include('user.urls')),
     path('admin/', admin.site.urls),
-    path('', include('api.urls')),
+    path('api', include('api.urls')),
     path('', include('eventReport.urls')),
     path('', include('activityReport.urls')),
 ]
