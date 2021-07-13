@@ -18,9 +18,12 @@ class CreateUserAPIView(CreateAPIView):
     permission_classes = [AllowAny]
 
     def create(self, request, *args, **kwargs):
+        print(request.data, 'hello')
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
+        print('ok')
+        print(serializer)
         headers = self.get_success_headers(serializer.data)
         # We create a token than will be used for future auth
         token = Token.objects.create(user=serializer.instance)
