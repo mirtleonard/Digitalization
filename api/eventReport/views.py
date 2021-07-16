@@ -1,7 +1,7 @@
-from activityReport.models import ActivityReport
-from api.activityReport.serializers import *
+from eventReport.models import EventReport
+from api.eventReport.serializers import *
 from rest_framework import viewsets
 
 class EventReportSerializers(viewsets.ModelViewSet):
-    queryset = ActivityReport.objects.all();
-    serializer_class = ActivityReportSerializer
+    queryset = EventReport.objects.all();
+    serializer_class = EventReportSerializers

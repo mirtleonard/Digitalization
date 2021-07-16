@@ -1,7 +1,8 @@
 from rest_framework import serializers
-from activityReport.models import EventReport
+from eventReport.models import EventReport
 
-class ActivityReportSerializer(serializers.HyperlinkedModelSerializer):
+class EventReportSerializers(serializers.HyperlinkedModelSerializer):
+    id = serializers.IntegerField(read_only=True)
     class Meta:
         model = EventReport
         fields = '__all__'
