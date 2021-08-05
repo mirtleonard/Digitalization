@@ -9,16 +9,17 @@ class ActivityReportForm(ModelForm):
         fields = '__all__'
         widgets = {
             'areas' : Select(choices = (
-                ('intelectuala', 'intelectuala'),
-                ('spirituala', 'spirituala'),
+                ('intelectuală', 'intelectuală'),
+                ('spirituală', 'spirituală'),
                 ('caracter', 'caracter'),
-                ('afectiva', 'afectiva'),
-                ('sociala', 'sociala'),
-                ('fizica', 'fizica'))),
+                ('afectivă', 'afectivă'),
+                ('socială', 'socială'),
+                ('fizică', 'fizică'))),
             'branch' : Select(choices = (
-                ('Lupisori', 'Lupisori'),
+                ('Lupișori', 'Lupișori'),
                 ('Temerari', 'Temerari'),
-                ('Exploratori', 'Exploratori'))),
+                ('Exploratori', 'Exploratori'),
+                ('Seniori', 'Seniori'))),
             'date' :  DateInput(attrs={'type' : 'date'})
         }
         labels = {

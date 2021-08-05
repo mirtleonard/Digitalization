@@ -1,2 +1,4 @@
-django-filters
-django-crispy-forms-1.12.0
+drf-base64
+django-filter
+djangorestframework
+django-crispy-forms

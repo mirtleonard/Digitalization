@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-u5^g_-1tgspl0wba$*7_*$&r!kzwuk4au(g@)&grmawf(k_ecb
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.1.9', '127.0.0.1']
+ALLOWED_HOSTS = ['192.168.0.103', '127.0.0.1']
 
 
 # Application definition
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django_filters',
     'rest_framework',
     'crispy_forms',
+    'drf_base64',
     'activityReport',
     'eventReport',
     'user',
@@ -163,9 +164,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = "media/"
 
 #email
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-EMAIL_PORT = '1025'
-EMAIL_HOST = 'localhost'
+#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+#EMAIL_PORT = '1025'
+#EMAIL_HOST = 'localhost'
 #EMAIL_USE_TLS
 #EMAIL_USE_SSL
 #EMAIL_TIMEOUT
@@ -177,12 +178,13 @@ REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
-        'rest_framework.permissions.IsAuthenticated',
+        #'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+        #'rest_framework.permissions.IsAuthenticated',
     ],
     'DEFAULT_AUTHENTICATION_CLASSES' : (
-        'rest_framework.authentication.TokenAuthentication',
+        #'rest_framework.authentication.TokenAuthentication',
     ),
+
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,
 }
