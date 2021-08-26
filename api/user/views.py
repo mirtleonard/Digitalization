@@ -1,3 +1,6 @@
+from rest_framework.authtoken.views import ObtainAuthToken
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework.authtoken.models import Token
 from rest_framework.generics import CreateAPIView
 from rest_framework.authtoken.models import Token
 from rest_framework.permissions import AllowAny
@@ -28,3 +31,11 @@ class CreateUserAPIView(CreateAPIView):
             status = status.HTTP_201_CREATED,
             headers = headers
         )
+
+class CustomObtainAuthToken(ObtainAuthToken):
+
+    def post(self, request, *args, **kwargs):
+        response = super(CustomObtainAuthToken, self).post(request, *args, **kwargs)
+        token = response.data['token']
+        user = UserSerializer(User.objects.get(username=request.data['username']))
+        return Response({'token' : token, 'user' : user.data})

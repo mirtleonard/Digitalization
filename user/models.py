@@ -8,8 +8,6 @@ class UsernameValidator(UnicodeUsernameValidator):
 class User(AbstractUser):
     email = models.EmailField(unique=True)
     branch = models.CharField(max_length=40)
-    activityReports = models.IntegerField(default=0)
-    eventReports = models.IntegerField(default=0)
     birth = models.DateField(default='2002-04-02')
     validator = UsernameValidator()
     username = models.CharField(

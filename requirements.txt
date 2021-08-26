@@ -1,3 +1,4 @@
+psycopg2
 drf-base64
 django-filter
 djangorestframework

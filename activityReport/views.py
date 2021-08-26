@@ -14,8 +14,7 @@ import os, shutil, zipfile
 from io import BytesIO
 
 # Create your views here.
-
-def savePhotos(photos, id):
+def saveActivityPhotos(photos, id):
     storage_path = os.path.join(settings.MEDIA_ROOT, 'activityReport/' + str(id) + '/img.png')
     for photo in photos:
         storage.save(storage_path, photo)
@@ -43,11 +42,8 @@ def createActivityReport(request):
         photos = request.FILES.getlist('photos')
         if form.is_valid():
             report = form.save()
-            savePhotos(photos, report.id)
+            saveActivityPhotos(photos, report.id)
             messages.success(request, "Raportul a fost creat!")
-            user = request.user
-            user.activityReports += 1
-            user.save()
             return HttpResponseRedirect(reverse('profile'))
         else:
             messages.error(request, "Raportul nu a fost creat!")
@@ -64,7 +60,7 @@ def updateActivityReport(request, report_id):
         form = ActivityReportForm(request.POST, request.FILES or None)
         photos = request.FILES.getlist('photos')
         if form.is_valid():
-            savePhotos(photos, report_id)
+            saveActivityPhotos(photos, report_id)
             messages.success(request, "Raportul a fost editat!")
             report = form.save(commit=False)
             report.id = report_id
@@ -90,9 +86,6 @@ def deleteActivityReport(request, report_id):
         messages.error(request, "Doar creatorul poate șterge formularul")
         return viewActivityReport(request, report_id)
     else:
-        user = request.user
-        user.activityReports -= 1
-        user.save()
         try:
             shutil.rmtree(settings.MEDIA_ROOT + '/activityReport/' + str(report_id))
         except OSError as e:
