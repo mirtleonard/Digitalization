@@ -5,6 +5,7 @@ from activityReport.models import ActivityReport
 
 class ActivityReportFilter(django_filters.FilterSet):
     areas = django_filters.CharFilter(widget = Select(choices = (
+                ('', ''),
                 ('intelectuala', 'intelectuala'),
                 ('spirituala', 'spirituala'),
                 ('caracter', 'caracter'),
@@ -24,6 +25,7 @@ class ActivityReportFilter(django_filters.FilterSet):
         }
         widgets = {
             'areas' : Select(choices = (
+                ('', ''),
                 ('intelectuala', 'intelectuala'),
                 ('spirituala', 'spirituala'),
                 ('caracter', 'caracter'),
