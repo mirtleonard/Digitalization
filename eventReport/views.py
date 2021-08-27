@@ -81,7 +81,7 @@ def deleteEventReport(request, report_id):
     report = get_object_or_404(EventReport, pk = report_id)
     if report.username != request.user.get_username():
         messages.error(request, "Doar creatorul poate șterge formularul")
-        return viewReport(request, report_id)
+        return viewEventReport(request, report_id)
     else:
         try:
             shutil.rmtree(settings.MEDIA_ROOT + '/eventReport/' + str(report_id))
