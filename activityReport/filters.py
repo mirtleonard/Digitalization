@@ -32,9 +32,9 @@ class ActivityReportFilter(django_filters.FilterSet):
                 ('sociala', 'sociala'),
                 ('fizica', 'fizica'))),
         }
-    def __init__(self, request, branch, *args, **kwargs):
+    def __init__(self, request, *args, **kwargs):
         super().__init__(request, *args, **kwargs)
-        self.branch = branch
+        self.filters['branch'].label = 'Ramură'
         self.filters['areas'].label = "Arie de dezvoltare"
         self.filters['title'].label = "Titlu"
         self.filters['username'].label = "Autor"
