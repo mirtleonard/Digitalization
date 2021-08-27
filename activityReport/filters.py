@@ -4,17 +4,9 @@ from django.db import models
 from activityReport.models import ActivityReport
 
 class ActivityReportFilter(django_filters.FilterSet):
-    areas = django_filters.CharFilter(widget = Select(choices = (
-                ('', ''),
-                ('intelectuala', 'intelectuala'),
-                ('spirituala', 'spirituala'),
-                ('caracter', 'caracter'),
-                ('afectiva', 'afectiva'),
-                ('sociala', 'sociala'),
-                ('fizica', 'fizica'))))
     class Meta:
         model = ActivityReport
-        fields = ['title', 'username', 'location']
+        fields = ['title', 'username', 'location', 'branch']
         filter_overrides = {
             models.CharField: {
                 'filter_class' : django_filters.CharFilter,
@@ -24,6 +16,13 @@ class ActivityReportFilter(django_filters.FilterSet):
             }
         }
         widgets = {
+            'branch' : Select(choices = (
+                ('', ''),
+                ('Lupisori', 'Lupisori'),
+                ('Temerari', 'Temerari'),
+                ('Exploratori', 'Exploratori'),
+                ('Seniori', 'Seniori'),
+            )),
             'areas' : Select(choices = (
                 ('', ''),
                 ('intelectuala', 'intelectuala'),

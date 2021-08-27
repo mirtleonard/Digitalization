@@ -95,8 +95,8 @@ def deleteActivityReport(request, report_id):
         return HttpResponseRedirect(reverse('profile'))
 
 @login_required
-def searchActivityReports(request, branch):
-    reports = ActivityReportFilter(request.GET, branch)
+def searchActivityReports(request):
+    reports = ActivityReportFilter(request.GET)
     context = {
         'reports': reports,
         'branch' : branch,
