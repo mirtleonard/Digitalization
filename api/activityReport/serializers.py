@@ -3,7 +3,7 @@ from activityReport.models import ActivityReport
 
 class ActivityReportSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField(read_only=True)
-    date = serializers.DateField(required = False)
+    date = serializers.DateTimeField(required = False)
 
     class Meta:
         model = ActivityReport
