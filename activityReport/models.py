@@ -9,7 +9,7 @@ class ActivityReport(models.Model):
     areas = models.CharField(max_length=240, default=" ")
     title = models.CharField(max_length=240, default=" ")
     location = models.CharField(max_length=240, default=" ")
-    date = models.DateField(default=date.today)
+    date = models.DateTimeField(default=date.today)
     duration = models.CharField(max_length=240, default=" ")
     participants = models.CharField(max_length=240, default=" ")
     materials = models.TextField()
