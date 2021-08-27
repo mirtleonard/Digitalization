@@ -99,7 +99,6 @@ def searchActivityReports(request):
     reports = ActivityReportFilter(request.GET)
     context = {
         'reports': reports,
-        'branch' : branch,
     }
     return render(request, 'searchActivityReports.html', context)
 

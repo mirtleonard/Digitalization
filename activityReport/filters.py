@@ -39,7 +39,3 @@ class ActivityReportFilter(django_filters.FilterSet):
         self.filters['title'].label = "Titlu"
         self.filters['username'].label = "Autor"
         self.filters['location'].label = "Locație"
-
-    def qs(self):
-        parent = super().qs
-        return parent.filter(branch__icontains = self.branch)

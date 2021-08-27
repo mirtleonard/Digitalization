@@ -6,7 +6,7 @@
   <div class="container card" style="width:400PX; height:500px; margin-top:10VH;">
     <div class="card-body">
       <h4 class="card-title">Caută după criteriu: </h4>
-      <form action='{% url 'searchActivityReports' branch %}' method="get">
+      <form action='{% url 'searchActivityReports' %}' method="get">
         {{reports.form|crispy}}
         <div class="d-flex justify-content-center">
           <button type="submit" class="btn my-2 btn-info">Search</button>
