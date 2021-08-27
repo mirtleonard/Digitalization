@@ -2,18 +2,19 @@
 {% load crispy_forms_tags %}
 {% block title %}Caută rapoarte{% endblock %}
 {% block content %}
-<div class="d-flex flex-wrap m-2">
-
-  <div class="container card d-flex justify-content-center" style="margin-top:10VH; width:400px; height=500px;">
-    <form  action="{% url 'searchEventReports' %}" method="get">
-      <div class="card-body">
-        <h4 class="card-title">Caută după criteriu:</h4>
-        {{reports.form|crispy}}
-        <div class="d-flex justify-content-center">
-          <button type="submit" class="d-inline my-2 btn btn-info">Search</button>
+<div class="d-flex flex-wrap ">
+  <div class= "container" style="width:500px">
+    <div class="container card " style="margin-top:10VH; width:400px; height=300px;">
+      <form  action="{% url 'searchEventReports' %}" method="get">
+        <div class="card-body">
+          <h4 class="card-title">Caută după criteriu:</h4>
+          {{reports.form|crispy}}
+          <div class="d-flex justify-content-center">
+            <button type="submit" class=" my-2 btn btn-info">Search</button>
+          </div>
         </div>
-      </div>
-    </form>
+      </form>
+    </div>
   </div>
 
   <div class="container d-flex justify-content-center"  id="result">

@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-u5^g_-1tgspl0wba$*7_*$&r!kzwuk4au(g@)&grmawf(k_ecb'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['planeta-pildesti.herokuapp.com', '127.0.0.1', '192.168.1.9', ]
 
@@ -88,26 +88,19 @@ WSGI_APPLICATION = 'digitalization.wsgi.application'
 
 import dj_database_url
 
-DATABASES = { 'default' : dj_database_url.config(conn_max_age=600, ssl_require=True) }
-
-#if True:
-#    DATABASES = {
-#        'default': {
-#            'ENGINE':  'django.db.backends.postgresql',
-#            'NAME':    os.environ['RDS_DB_NAME'],
-#            'USER':    os.environ['RDS_USERNAME'],
-#            'PASSWORD':os.environ['RDS_PASSWORD'],
-#            'HOST':    os.environ['RDS_HOSTNAME'],
-#            'PORT':    os.environ['RDS_PORT'],
-#        }
-#    }
-#else: 
-#    DATABASES = {
-#        'default': {
-#            'ENGINE': 'django.db.backends.sqlite3',
-#            'NAME':    'database',
-#        }
-#    }
+if True:
+    DATABASES = { 'default' : dj_database_url.config(conn_max_age=600, ssl_require=True) }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE':  'django.db.backends.postgresql',
+            'NAME':    'digitalization',
+            'USER':    'postgres',
+            'PASSWORD':'',
+            'HOST':    'localhost',
+            'PORT':    '5432',
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
