@@ -6,7 +6,7 @@ from activityReport.models import ActivityReport
 class ActivityReportFilter(django_filters.FilterSet):
     class Meta:
         model = ActivityReport
-        fields = ['title', 'username', 'location', 'branch']
+        fields = ['title', 'username', 'location', 'branch', 'areas']
         filter_overrides = {
             models.CharField: {
                 'filter_class' : django_filters.CharFilter,
