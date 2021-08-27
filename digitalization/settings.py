@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 import os
+import psycopg2
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -26,7 +27,7 @@ SECRET_KEY = 'django-insecure-u5^g_-1tgspl0wba$*7_*$&r!kzwuk4au(g@)&grmawf(k_ecb
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['planetapildesti-env-1.eba-adqc2uxy.eu-central-1.elasticbeanstalk.com', '127.0.0.1']
+ALLOWED_HOSTS = ['planeta-pildesti.herokuapp.com', '127.0.0.1', '192.168.1.9', ]
 
 
 # Application definition
@@ -86,24 +87,28 @@ WSGI_APPLICATION = 'digitalization.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-if 'RDS_B_NAME' in os.environ:
-    DATABASES = {
-        'default': {
-            'ENGINE':  'django.db.backends.postgresql',
-            'NAME':    os.environ['RDS_DB_NAME'],
-            'USER':    os.environ['RDS_USERNAME'],
-            'PASSWORD':os.environ['RDS_PASSWORD'],
-            'HOST':    os.environ['RDS_HOSTNAME'],
-            'PORT':    os.environ['RDS_PORT'],
-        }
-    }
-else: 
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME':    'database',
-        }
-    }
+import dj_database_url
+
+DATABASES = { 'default' : dj_database_url.config(conn_max_age=600, ssl_require=True) }
+
+#if True:
+#    DATABASES = {
+#        'default': {
+#            'ENGINE':  'django.db.backends.postgresql',
+#            'NAME':    os.environ['RDS_DB_NAME'],
+#            'USER':    os.environ['RDS_USERNAME'],
+#            'PASSWORD':os.environ['RDS_PASSWORD'],
+#            'HOST':    os.environ['RDS_HOSTNAME'],
+#            'PORT':    os.environ['RDS_PORT'],
+#        }
+#    }
+#else: 
+#    DATABASES = {
+#        'default': {
+#            'ENGINE': 'django.db.backends.sqlite3',
+#            'NAME':    'database',
+#        }
+#    }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -145,6 +150,7 @@ USE_TZ = True
 
 STATIC_DIR = 'static'
 STATIC_URL = 'static/'
+STATIC_ROOT = 'staticfiles'
 
 STATICFILES_DIRS=[
     STATIC_DIR,
@@ -196,3 +202,7 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 1000,
 }
+
+#heroku
+import django_heroku
+django_heroku.settings(locals())

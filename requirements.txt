@@ -1,5 +1,8 @@
-psycopg2
+gunicorn
 drf-base64
 django-filter
+django-heroku
+dj-database-url
+psycopg2-binary
 djangorestframework
 django-crispy-forms
