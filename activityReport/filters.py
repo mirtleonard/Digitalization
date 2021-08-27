@@ -1,41 +1,30 @@
-import django_filters
 from django.forms import *
 from django.db import models
+import django_filters as filters
 from activityReport.models import ActivityReport
 
-class ActivityReportFilter(django_filters.FilterSet):
-    class Meta:
-        model = ActivityReport
-        fields = ['title', 'username', 'location', 'branch', 'areas']
-        filter_overrides = {
-            models.CharField: {
-                'filter_class' : django_filters.CharFilter,
-                'extra' : lambda f: {
-                    'lookup_expr': 'unaccent__icontains',
-                }
-            }
-        }
-        widgets = {
-            'branch' : Select(choices = (
-                ('', ''),
-                ('Lupisori', 'Lupisori'),
-                ('Temerari', 'Temerari'),
-                ('Exploratori', 'Exploratori'),
-                ('Seniori', 'Seniori'),
-            )),
-            'areas' : Select(choices = (
+class ActjvityReportFilter(django_filters.FilterSet):
+    branch = filters.CharFilter(label = 'Ramură', lookup_expr= 'unaccent__icontains',
+        widget = Select(choices = (
                 ('', ''),
                 ('intelectuala', 'intelectuala'),
                 ('spirituala', 'spirituala'),
                 ('caracter', 'caracter'),
                 ('afectiva', 'afectiva'),
                 ('sociala', 'sociala'),
-                ('fizica', 'fizica'))),
-        }
-    def __init__(self, request, *args, **kwargs):
-        super().__init__(request, *args, **kwargs)
-        self.filters['branch'].label = 'Ramură'
-        self.filters['areas'].label = "Arie de dezvoltare"
-        self.filters['title'].label = "Titlu"
-        self.filters['username'].label = "Autor"
-        self.filters['location'].label = "Locație"
+                ('fizica', 'fizica'),
+        )))
+    areas = filters.CharFilter(label = 'Arie de dezvoltare', lookup_expr= 'unaccent__icontains',
+        widget = Select(choices = (
+                ('', ''),
+                ('Lupisori', 'Lupisori'),
+                ('Temerari', 'Temerari'),
+                ('Exploratori', 'Exploratori'),
+                ('Seniori', 'Seniori'),
+        )))
+    title = filters.CharFilter(label = 'Titlu', lookup_expr= 'unaccent__icontains')
+    username = filters.CharFilter(label = 'Autor', lookup_expr= 'unaccent__icontains')
+    location = filters.CharFilter(label = 'Autor', lookup_expr= 'unaccent__icontains')
+    class Meta:
+        model = ActivityReport
+        fields = ['title', 'username', 'location', 'branch', 'areas']
