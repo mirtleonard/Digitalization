@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block title %} Task {% endblock %}
+{% block content %}
+<div class="container d-flex justify-content-center">
+  <div class="card bg-white" style="width:600px; margin-top : 25VH; margin-bottom: 10VH">
+    <div class="card-body d-flex justify-content-center flex-wrap">
+      <h4>{{task.title}}<br></h4>
+      <h4>{{task.dueDate}}</h4>
+    </div>
+    <div class="card-footer d-flex justify-content-center bg-white">
+      <form id="task" action="{%url 'updateTask' task.id %}" method="post">
+        {% csrf_token %}
+        {% if task.state %}
+          <button type="submit" class="btn btn-success" id="current1" onclick="submit();disableButton('current1')" name="state">Done</button>
+        {% else %}
+          <button type="submit" class="btn btn-danger" id="current1" onclick="submit();disableButton('current1')" name="state">Not done</button>
+        {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -51,7 +51,7 @@
     <div class="card-footer bg-white">
       <form action="{% url 'updateActivityReport' report.id %}" id="update" method="get"></form>
       <form action="{% url 'deleteActivityReport' report.id %}" id="delete" method="post">{% csrf_token %}</form>
-      <button class="btn btn-info d-inline mb-3" type="submit" form="update">Editează</button>
+      <button class="btn btn-info d-inline mb-3" type="submit" id="current1" onclick="submit();disableButton('current1')" form="update">Editează</button>
       <button type="button" class="btn btn-info float-right" data-toggle="modal" data-target="#validate">Șterge</button>
     </div>
   </div>
@@ -69,7 +69,7 @@
           <p>Sigur vreți să ștergeți raportul?</p>
         </div>
         <div class="modal-footer">
-          <button class="btn btn-danger d-inline" type="submit" form="delete">Șterge</button>
+          <button class="btn btn-danger d-inline" id="current" onclick="submit(); disableButton('current')" type="submit" form="delete">Șterge</button>
           <button type="button" class="btn btn-info" data-dismiss="modal">Anulează</button>
         </div>
       </div>
