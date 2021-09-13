@@ -8,14 +8,11 @@ from eventReport.models import EventReport
 from django.contrib import messages
 from django.conf import settings
 from django.urls import reverse
+from googleAPI.api import *
 import os, shutil, zipfile
 from io import BytesIO
 
 # Create your views here.
-def saveEventPhotos(photos, id):
-    storage_path = os.path.join(settings.MEDIA_ROOT, 'eventReport/' + str(id) + '/img.png')
-    for photo in photos:
-        storage.save(storage_path, photo)
 
 @login_required
 def viewEventReport(request, report_id):
@@ -39,7 +36,7 @@ def createEventReport(request):
         photos = request.FILES.getlist('photos')
         if form.is_valid():
             report = form.save()
-            saveEventPhotos(photos, report.id)
+            saveFiles(photos, 'event' + str(report.id))
             messages.success(request, "Raportul a fost creat!")
             return HttpResponseRedirect(reverse('profile'))
         else:
@@ -57,7 +54,7 @@ def updateEventReport(request, report_id):
         form = EventReportForm(request.POST)
         photos = request.FILES.getlist('photos')
         if form.is_valid():
-            saveEventPhotos(photos, report_id)
+            saveFiles(photos, 'event' + str(report_id))
             messages.success(request, "Raportul a fost editat!")
             report = form.save(commit=False)
             report.id = report_id
@@ -83,10 +80,7 @@ def deleteEventReport(request, report_id):
         messages.error(request, "Doar creatorul poate șterge formularul")
         return viewEventReport(request, report_id)
     else:
-        try:
-            shutil.rmtree(settings.MEDIA_ROOT + '/eventReport/' + str(report_id))
-        except OSError as e:
-            pass
+        deleteFile('event' + str(report_id))
         EventReport.objects.filter(id = report_id).delete()
         messages.success(request, "Raportul a fost șters!")
         return HttpResponseRedirect(reverse('profile'))

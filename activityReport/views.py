@@ -10,24 +10,23 @@ from django.core.files.base import ContentFile
 from django.contrib import messages
 from django.conf import settings
 from django.urls import reverse
+from googleAPI.api import *
 import os, shutil, zipfile
 from io import BytesIO
 
-# Create your views here.
-def saveActivityPhotos(photos, id):
-    storage_path = os.path.join(settings.MEDIA_ROOT, 'activityReport/' + str(id) + '/img.png')
-    for photo in photos:
-        storage.save(storage_path, photo)
-
-@login_required
+# Create your views here.@login_required
 def viewActivityReport(request, report_id):
     photos = ''
     try:
-        photos = os.listdir(os.path.join(settings.MEDIA_ROOT, 'activityReport/' + str(report_id)))
-    except OSError as e:
-        photos = ''
+        photos = os.listdir(os.path.join(settings.MEDIA_ROOT, 'activity' + str(report_id)))
+    except:
+        downloadFiles('activity' + str(report_id))
+        try:
+            photos = os.listdir(os.path.join(settings.MEDIA_ROOT, 'activity' + str(report_id)))
+        except:
+            photos = ''
     report = get_object_or_404(ActivityReport, pk=report_id)
-    path = settings.MEDIA_URL + 'activityReport/' + str(report_id) + '/'
+    path = settings.MEDIA_URL + 'activity' + str(report_id) + '/'
     context = {
         'report' : report,
         'photos' : photos,
@@ -42,7 +41,7 @@ def createActivityReport(request):
         photos = request.FILES.getlist('photos')
         if form.is_valid():
             report = form.save()
-            saveActivityPhotos(photos, report.id)
+            saveFiles(photos, 'activity' + str(report.id))
             messages.success(request, "Raportul a fost creat!")
             return HttpResponseRedirect(reverse('profile'))
         else:
@@ -60,7 +59,7 @@ def updateActivityReport(request, report_id):
         form = ActivityReportForm(request.POST, request.FILES or None)
         photos = request.FILES.getlist('photos')
         if form.is_valid():
-            saveActivityPhotos(photos, report_id)
+            saveFiles(photos, 'activity' +  str(report_id))
             messages.success(request, "Raportul a fost editat!")
             report = form.save(commit=False)
             report.id = report_id
@@ -86,10 +85,7 @@ def deleteActivityReport(request, report_id):
         messages.error(request, "Doar creatorul poate șterge formularul")
         return viewActivityReport(request, report_id)
     else:
-        try:
-            shutil.rmtree(settings.MEDIA_ROOT + '/activityReport/' + str(report_id))
-        except OSError as e:
-            pass
+        deleteFile('activity' + str(report_id))
         ActivityReport.objects.filter(id = report_id).delete()
         messages.success(request, "Raportul a fost șters!")
         return HttpResponseRedirect(reverse('profile'))
