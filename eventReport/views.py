@@ -9,8 +9,8 @@ from django.contrib import messages
 from django.conf import settings
 from django.urls import reverse
 from googleAPI.api import *
-import os, shutil, zipfile
 from io import BytesIO
+import os, zipfile
 
 # Create your views here.
 
@@ -18,10 +18,14 @@ from io import BytesIO
 def viewEventReport(request, report_id):
     report = get_object_or_404(EventReport, pk=report_id)
     try:
-        photos = os.listdir(os.path.join(settings.MEDIA_ROOT, 'eventReport/' + str(report_id)))
+        photos = os.listdir(os.path.join(settings.MEDIA_ROOT, 'event' + str(report_id)))
     except OSError as e:
-        photos = ''
-    path = settings.MEDIA_URL + 'eventReport/' + str(report_id) + '/'
+        downloadFiles('event' + str(report_id))
+        try:
+            photos = os.listdir(os.path.join(settings.MEDIA_ROOT, 'event' + str(report_id)))
+        except:
+            photos = ''
+    path = settings.MEDIA_URL + 'event' + str(report_id) + '/'
     context = {
         'report' : report,
         'photos' : photos,
@@ -55,6 +59,7 @@ def updateEventReport(request, report_id):
         photos = request.FILES.getlist('photos')
         if form.is_valid():
             saveFiles(photos, 'event' + str(report_id))
+            clearStorage('/event' + str(report_id))
             messages.success(request, "Raportul a fost editat!")
             report = form.save(commit=False)
             report.id = report_id
@@ -95,7 +100,7 @@ def searchEventReports(request):
 
 @login_required
 def download(request, report_id):
-    path = os.path.join(settings.MEDIA_ROOT, 'eventReport/' + str(report_id))
+    path = os.path.join(settings.MEDIA_ROOT, 'event' + str(report_id))
     photos = os.listdir(path)
     zip_files = "%s.zip" % "img"
 

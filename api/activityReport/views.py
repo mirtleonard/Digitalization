@@ -3,10 +3,10 @@ from activityReport.models import ActivityReport
 from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
 from api.activityReport.serializers import *
+from googleAPI.api import deleteFile
 from rest_framework import viewsets
 from rest_framework import status
 from django.conf import settings
-import os, shutil, zipfile
 
 class ActivityReportViewSet(viewsets.ModelViewSet):
     parser_classes = [JSONParser]
@@ -15,9 +15,6 @@ class ActivityReportViewSet(viewsets.ModelViewSet):
 
     def destroy(self, request, *args, **kwargs):
         report = self.get_object()
-        try:
-            shutil.rmtree(settings.MEDIA_ROOT + '/activityReport/' + str(report.id))
-        except OSError as e:
-            pass
+        deleteFile('activity' + str(report.id))
         report.delete()
         return Response(status = status.HTTP_201_CREATED)

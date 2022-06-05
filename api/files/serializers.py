@@ -8,5 +8,5 @@ class fileSerializer(serializers.Serializer):
     type = serializers.CharField()
 
     def create(self, validated_data):
-        saveFiles(validated_data['files'], validated_data['type'] + validated_data['id'])
+        saveFiles(validated_data['files'], validated_data['type'] + str(validated_data['id']))
         return validated_data

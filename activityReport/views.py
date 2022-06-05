@@ -11,8 +11,8 @@ from django.contrib import messages
 from django.conf import settings
 from django.urls import reverse
 from googleAPI.api import *
-import os, shutil, zipfile
 from io import BytesIO
+import os, zipfile
 
 # Create your views here.@login_required
 def viewActivityReport(request, report_id):
@@ -60,6 +60,7 @@ def updateActivityReport(request, report_id):
         photos = request.FILES.getlist('photos')
         if form.is_valid():
             saveFiles(photos, 'activity' +  str(report_id))
+            clearStorage('/activity' + str(report_id))
             messages.success(request, "Raportul a fost editat!")
             report = form.save(commit=False)
             report.id = report_id
@@ -100,7 +101,7 @@ def searchActivityReports(request):
 
 @login_required
 def download(request, report_id):
-    path = os.path.join(settings.MEDIA_ROOT, 'activityReport/' + str(report_id))
+    path = os.path.join(settings.MEDIA_ROOT, 'activity' + str(report_id))
     photos = os.listdir(path)
     zip_files = "%s.zip" % "img"
 

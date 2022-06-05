@@ -1,3 +1,4 @@
+from pyexpat import model
 from django.db import models
 from datetime import date
 # Create your models here.
@@ -9,7 +10,10 @@ class EventReport(models.Model):
     title = models.CharField(max_length = 100)
     members = models.CharField(max_length = 1000)
     location = models.CharField(max_length = 240)
+    goals = models.TextField()
     description = models.TextField()
+    weaknesses = models.TextField()
+    strengths = models.TextField()
     beginingDate = models.DateTimeField(blank = True, null = True)
     endDate = models.DateTimeField(blank = True, null = True)
     def __str__(self):

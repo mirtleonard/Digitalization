@@ -1,8 +1,12 @@
 gunicorn
 drf-base64
+oauth2client
 django-filter
 django-heroku
 dj-database-url
 psycopg2-binary
 djangorestframework
 django-crispy-forms
+google-auth-httplib2
+google-auth-oauthlib
+google-api-python-client

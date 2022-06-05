@@ -24,4 +24,7 @@ class EventReportForm(ModelForm):
             'endDate' : 'Data de sfârșit',
             'beginingDate' : 'Data de început',
             'members' : 'Participanți',
+            'strengths' : 'Puncte tari',
+            'weaknesses' : 'Puncte slabe',
+            'goals' : 'Obiective',
         }
